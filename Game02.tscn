@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ca1nri80ulxw4"]
+[gd_scene load_steps=6 format=3 uid="uid://5lnaday3onlf"]
 
-[ext_resource type="Texture2D" uid="uid://dppw2da87va6l" path="res://icon.svg" id="1_yey56"]
-[ext_resource type="PackedScene" uid="uid://dtli3ghkqdhc6" path="res://Player.tscn" id="2_h5p63"]
-[ext_resource type="AudioStream" uid="uid://d3eyvdarw3a4w" path="res://Mustard - Ballin’.mp3" id="3_pheeu"]
-[ext_resource type="Script" path="res://RhythmManager.gd" id="4_nphqd"]
+[ext_resource type="Texture2D" uid="uid://dppw2da87va6l" path="res://icon.svg" id="1_gmke4"]
+[ext_resource type="PackedScene" uid="uid://dtli3ghkqdhc6" path="res://Player.tscn" id="2_d6r6q"]
+[ext_resource type="AudioStream" uid="uid://d3eyvdarw3a4w" path="res://Mustard - Ballin’.mp3" id="3_7ssiv"]
+[ext_resource type="Script" path="res://RhythmManager.gd" id="4_c3utu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1hce"]
 size = Vector2(893.5, 128)
@@ -15,7 +15,7 @@ size = Vector2(893.5, 128)
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
 position = Vector2(600, 487)
 scale = Vector2(6.96875, 1)
-texture = ExtResource("1_yey56")
+texture = ExtResource("1_gmke4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(600.25, 489)
@@ -27,19 +27,19 @@ position = Vector2(523, -241)
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(600, 487)
 scale = Vector2(6.96875, 1)
-texture = ExtResource("1_yey56")
+texture = ExtResource("1_gmke4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(600.25, 489)
 shape = SubResource("RectangleShape2D_q1hce")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_h5p63")]
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_d6r6q")]
 position = Vector2(413, 295)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(572, 330)
 
 [node name="RhythmManager" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_pheeu")
+stream = ExtResource("3_7ssiv")
 volume_db = -80.0
-script = ExtResource("4_nphqd")
+script = ExtResource("4_c3utu")

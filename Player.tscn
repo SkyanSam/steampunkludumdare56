@@ -8,10 +8,10 @@ size = Vector2(51, 99)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("2")
-speed = 1000
-accel = 726
-decel = 1482
-jump_speed = -2540
+speed = 666
+accel = 1452
+decel = 2964
+jump_speed = -1587
 gravity = 3600
 falling_gravity = 5000
 
@@ -22,3 +22,10 @@ texture = ExtResource("2_451ms")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_pxys3")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="ParryTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="ParryTimer" to="." method="_on_parry_timer_timeout"]
