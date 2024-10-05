@@ -8,10 +8,12 @@ size = Vector2(51, 99)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("2")
-speed = 600
-jump_speed = -1500
-gravity = 2000
-falling_gravity = 3000
+speed = 1000
+accel = 726
+decel = 1482
+jump_speed = -2540
+gravity = 3600
+falling_gravity = 5000
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

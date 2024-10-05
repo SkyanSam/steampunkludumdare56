@@ -1,11 +1,19 @@
 extends CharacterBody2D
 
+# LOOK AT JONAS TYROLLER CHARACTER MOVEMENT TUTORIAL
+# SEE IF YOU CAN MAKE MORE IMPROVEMENTS!!! YEAH!!!
+
+# ALSO ENEMIES BY DEFAULT SHOULD HAVE SLIGHT KNOCKBACK
+# MAKE A DUMMY ENEMY TO TEST FEELING OF COMBAT!!
+
 @export var speed: int = 1200
 @export var accel: int = 1000;
 @export var decel: int = 2000;
 @export var jump_speed: int = -3000
+@export var ground_pound_speed: int = 5000
 @export var gravity: int = 4000
 @export var falling_gravity: int = 6000;
+var is_ground_pound = false
 #later apply a timer so that if the character is slightly off the ledge, they can still jump
 
 var vel = Vector2.ZERO
@@ -33,8 +41,18 @@ func _physics_process(delta):
 	
 	if (vel.y > 0):
 		vel.y += gravity * delta
-	else:
+	elif (not is_on_floor()):
 		vel.y += falling_gravity * delta
+	
+	if (Input.is_action_just_pressed("groundpound") and (not is_on_floor())):
+		is_ground_pound = true
+		
+	if (is_ground_pound):
+		if (is_on_floor()):
+			is_ground_pound = false
+			vel.y = 0
+		else:
+			vel.y = ground_pound_speed
 	
 	set_velocity(vel)
 	set_up_direction(Vector2.UP)
