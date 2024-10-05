@@ -23,6 +23,14 @@ var is_ground_pound = false
 var is_jump_last_frame = false
 var can_attack = true
 var can_parry = false
+var mouse_health = 100
+var max_health = 100
+var ballin_lol: bool = true #Flag to see if player is DEAD
+
+signal health_changed(mouse_health)  # Signal updated to use mouse_health
+
+signal player_died() #lol u know, to trigger a game over screen
+
 @onready var rhythm_manager = get_tree().get_root().get_node(NodePath(get_tree().current_scene.name)).get_node("RhythmManager")
 #later apply a timer so that if the character is slightly off the ledge, they can still jump
 
@@ -34,6 +42,7 @@ enum AttackType {
 	PARRY
 }
 
+# stuff for x velocity
 func get_input(delta: float):
 	if Input.is_action_pressed("ui_right"):
 		var cel = decel if vel.x < 0 else accel
@@ -54,6 +63,7 @@ func get_input(delta: float):
 func _process(delta):
 	pass
 
+# stuff for y velocity
 func _physics_process(delta):
 	get_input(delta)
 	
@@ -108,3 +118,17 @@ func _on_enemy_attack():
 
 func _on_parry_timer_timeout() -> void:
 	can_parry = false
+
+func _eat_shit():    #you eat shit
+	ballin_lol = false
+	emit_signal("player_died")
+
+func take_damage(damage_amount: int):
+	if ballin_lol:
+		mouse_health -= damage_amount
+		mouse_health = clamp(mouse_health, 0, max_health)  # Prevent negative health
+        
+		emit_signal("health_changed", mouse_health)  # Emit signal with mouse_health
+        
+		if mouse_health <= 0:
+			_eat_shit()

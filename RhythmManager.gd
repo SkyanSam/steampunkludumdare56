@@ -5,6 +5,9 @@ extends AudioStreamPlayer2D
 @export var timing_window = 0.07
 
 var beat_time = 0.0
+var can_signal = true
+signal onBeat
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	beat_time = compute_beat_time()
@@ -13,8 +16,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if (Input.is_action_just_pressed("rhythm")):
-		is_within_timing_window(delta)
+	if (is_within_timing_window(delta) and can_signal):
+		emit_signal("onBeat")
+		$Timer.start()
+		can_signal = false
 
 func compute_beat_time():
 	return (60.0 / BPM)
@@ -24,5 +29,8 @@ func is_within_timing_window(delta: float):
 	var seconds_to_beat_2 = abs(seconds_to_beat - beat_time)
 	if (seconds_to_beat_2 < seconds_to_beat):
 		seconds_to_beat = seconds_to_beat_2
-	print(str(seconds_to_beat < timing_window) + ", " + str(seconds_to_beat))
+	#print(str(seconds_to_beat < timing_window) + ", " + str(seconds_to_beat))
 	return (seconds_to_beat <= timing_window || seconds_to_beat <= 1.5 * delta)
+
+func _on_timer_timeout() -> void:
+	can_signal = true

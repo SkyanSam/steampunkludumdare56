@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Declare enemy properties
 var health = 120
-var move_speed = 1000
+var move_speed = 500
 var sprint_speed = 2000
 var is_sprinting = false
 var can_attack = true
@@ -17,17 +17,21 @@ var jaw_attack_range = 100  # Set the range in which the jaw attack can happen
 var jaw_attack_windup_time = 0.5  # Time before the jaw attack triggers
 var jaw_attack_damage = 20  # Damage dealt by the jaw attack
 
+var can_spear_attack = true
 # Signal to notify the player when a miss happens SAM ADD THIS IN
-signal spear_miss()
+signal spear_miss
 
 # Called when the node enters the scene
 func _ready():
-	player = get_node("/root/Player")
-	
+	player = get_node("/root/" + get_tree().current_scene.name + "/Player")
+	player.connect("playerAttack", Callable(self, "_on_Player_attack"))
 	# Connect spear collision signals (using Callable syntax in Godot 4)
 	var spear = $Spear
+	
+	
 	spear.connect("body_entered", Callable(self, "_on_spear_hit"))
 	
+	await player.playerAttack
 	# Connect the response from the player for the miss check
 	spear.connect("body_entered", Callable(self, "_on_spear_hit"))
 
@@ -41,24 +45,29 @@ func _process(delta):
 	# If the spear has been thrown, the ant can only sprint and use jaw attacks
 	if has_thrown_spear:
 		if is_sprinting:
-			move_toward_player(delta)  # The ant can still sprint toward the player
+			move_toward_player()  # The ant can still sprint toward the player
 			# Logic for jaw attack goes here
 			perform_jaw_attack()  # Call this when the ant performs the jaw attack
 	else:
 		# Normal attack behavior when spear hasn't been thrown
 		if distance_to_player < 1280:
-			move_toward_player(delta)
+			move_toward_player()
+		if distance_to_player < 100 and can_spear_attack:
+			spear_attack()
+			can_spear_attack = false
+			$SpearAttackTimer.start()
 
 # Move towards the player
-func move_toward_player(delta):
+func move_toward_player():
 	var direction = (player.global_position - global_position).normalized()
-	velocity = direction * move_speed * delta
+	velocity = direction * move_speed 
 	move_and_slide()
 
 # Signal-based attack detection, called when the player attacks
-func _on_Player_attack(hitbox):
-	if hitbox.overlaps($Hitbox):  # Assuming you have a defined hitbox for the ant
+func _on_Player_attack(type, player):
+	if $Hitbox.shape.collide(transform, player.get_node("CollisionShape2D").shape, player.transform):  # Assuming you have a defined hitbox for the ant
 		take_damage(player.attack_power)
+		print("successful player attack")
 
 # Take damage and apply knockback
 func take_damage(damage):
@@ -124,6 +133,19 @@ func perform_jaw_attack():
 
 		is_jaw_attacking = false
 
+func spear_attack():
+	var tween = create_tween().set_parallel()
+	var original_position = $Spear_position
+	tween.tween_property($Spear, "position", $Spear.position - Vector2(30, -30), 0.1)
+	tween.tween_callback(spear_attack_collide)
+	tween.chain().tween_property($Spear, "position", $Spear.position, 0.1)
+
+func spear_attack_collide():
+	print("spear attack collide called")
+	_on_enemy_spear_miss_response(false)
+	if not $Spear/CollisionShape2D.shape.collide($Spear.transform, player.get_node("CollisionShape2D").shape, player.transform):
+		pass #_on_enemy_spear_miss_response(true) #emit_signal("spear_miss")
+	
 # Start death sequence and animation
 func start_death_sequence():
 	is_dead = true
@@ -133,3 +155,7 @@ func start_death_sequence():
 # Allow the enemy to take damage from player
 func _on_enemy_hit(damage):
 	take_damage(damage)
+
+
+func _on_spear_attack_timer_timeout() -> void:
+	can_spear_attack = true

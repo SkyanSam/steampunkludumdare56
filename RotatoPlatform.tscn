@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://coxvvfimv3big"]
+
+[ext_resource type="Texture2D" uid="uid://ny8u02c08oj3" path="res://rotato.png" id="1_js4qq"]
+[ext_resource type="Script" path="res://RotatoPlatform.gd" id="1_n8qxh"]
+
+[node name="RotatoPlatform" type="StaticBody2D"]
+script = ExtResource("1_n8qxh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_js4qq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-5, -27, 157, -1, 21, 21, 0, 30, -22, 21, -158, 1)
