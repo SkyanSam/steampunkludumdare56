@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @export var speed: int = 1200
+@export var accel: int = 1000;
+@export var decel: int = 2000;
 @export var jump_speed: int = -3000
 @export var gravity: int = 4000
 @export var falling_gravity: int = 6000;
@@ -8,19 +10,26 @@ extends CharacterBody2D
 
 var vel = Vector2.ZERO
 
-func get_input():
-	vel.x = 0
+func get_input(delta: float):
 	#if ui_right is pressed, velocity is increased to the right and sprite is flipped
 	if Input.is_action_pressed("ui_right"):
-		vel.x += speed
+		vel.x += accel * delta
 		#$AnimatedSprite2D.flip_h = false
 	#if ui_right is pressed, velocity is increased to the left and sprite is flipped
-	if Input.is_action_pressed("ui_left"):
-		vel.x -= speed
+	elif Input.is_action_pressed("ui_left"):
+		vel.x -= accel * delta
+	elif vel.x > 0:
+		vel.x -= decel * delta
+	elif vel.x < 0:
+		vel.x += decel * delta
 		#$AnimatedSprite2D.flip_h = true
+	if (vel.x > speed):
+		vel.x = speed
+	if (vel.x < -speed):
+		vel.x = -speed
 
 func _physics_process(delta):
-	get_input()
+	get_input(delta)
 	
 	if (vel.y > 0):
 		vel.y += gravity * delta

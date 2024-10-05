@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d3eyvdarw3a4w"
+path="res://.godot/imported/Mustard - Ballin’.mp3-8d631a3754d9f9bf4576d41a85b9eafa.mp3str"
+
+[deps]
+
+source_file="res://Mustard - Ballin’.mp3"
+dest_files=["res://.godot/imported/Mustard - Ballin’.mp3-8d631a3754d9f9bf4576d41a85b9eafa.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
