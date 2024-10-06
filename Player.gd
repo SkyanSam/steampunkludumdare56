@@ -22,7 +22,7 @@ signal playerAttack
 var is_ground_pound = false
 var is_jump_last_frame = false
 var can_attack = true
-var can_parry = false
+var can_parry = true
 var mouse_health = 100
 var max_health = 100
 var ballin_lol: bool = true #Flag to see if player is DEAD
@@ -92,13 +92,14 @@ func _physics_process(delta):
 		is_jump_last_frame = false
 		if vel.y < 0.0:
 			vel.y *= .2
-	
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("parry"):
 		if can_parry:
 			emit_signal("playerAttack", AttackType.PARRY, self)
+			$ParryTimer.start(attack_cooldown)
 			can_parry = false
-		elif can_attack:
-			$AttackTimer.start(attack_cooldown)
+	if Input.is_action_just_pressed("attack"):
+		if can_attack:
+			$AttackTimer.start(parry_window)
 			can_attack = false
 			emit_signal("playerAttack", AttackType.ONBEAT if rhythm_manager.is_within_timing_window(delta) else AttackType.NORMAL, self)
 			print("player attack")
@@ -117,13 +118,14 @@ func _on_enemy_attack():
 		$ParryTimer.start(parry_window)
 
 func _on_parry_timer_timeout() -> void:
-	can_parry = false
+	can_parry = true
 
 func _eat_shit():    #you eat shit
 	ballin_lol = false
 	emit_signal("player_died")
 
 func take_damage(damage_amount: int):
+	$HurtSound.play()
 	if ballin_lol:
 		mouse_health -= damage_amount
 		mouse_health = clamp(mouse_health, 0, max_health)  # Prevent negative health

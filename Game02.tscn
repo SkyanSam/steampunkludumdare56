@@ -92,5 +92,6 @@ shape = SubResource("RectangleShape2D_x5yhn")
 
 [node name="RotatoPlatform" parent="." instance=ExtResource("8_1y26b")]
 position = Vector2(326, 205)
+rotate_amount = 90
 
 [connection signal="timeout" from="EnemyAnt/SpearAttackTimer" to="EnemyAnt" method="_on_spear_attack_timer_timeout"]

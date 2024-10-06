@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkhv2oalmaea0"]
+
+[ext_resource type="Script" path="res://KeyAndLock/Key.gd" id="1_xqmyd"]
+[ext_resource type="Texture2D" uid="uid://dppw2da87va6l" path="res://icon.svg" id="2_vfq3w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pi1fl"]
+
+[node name="Key" type="Area2D"]
+script = ExtResource("1_xqmyd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(7.70092e-07, 0.722875, 0.629559, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_vfq3w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pi1fl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

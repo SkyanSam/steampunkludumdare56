@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2erxw5h3ilne"]
+
+[ext_resource type="Texture2D" uid="uid://dppw2da87va6l" path="res://icon.svg" id="1_8wjo7"]
+[ext_resource type="Script" path="res://ActualAnt/ActualAnt.gd" id="1_wrmo7"]
+
+[sub_resource type="Curve2D" id="Curve2D_m7d4m"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8ptm"]
+
+[node name="ActualAntPath2D" type="Path2D"]
+curve = SubResource("Curve2D_m7d4m")
+
+[node name="ActualAntPathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+
+[node name="ActualAnt" type="Area2D" parent="ActualAntPathFollow2D"]
+script = ExtResource("1_wrmo7")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActualAntPathFollow2D/ActualAnt"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_8wjo7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActualAntPathFollow2D/ActualAnt"]
+shape = SubResource("RectangleShape2D_x8ptm")

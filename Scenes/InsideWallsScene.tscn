@@ -1,0 +1,60 @@
+[gd_scene load_steps=12 format=3 uid="uid://dhn2jatu23bus"]
+
+[ext_resource type="Texture2D" uid="uid://cyi4e5gbk6l3t" path="res://Assets/InsideWalls/IMG-1016.PNG" id="1_iutpg"]
+[ext_resource type="Texture2D" uid="uid://bfow0rdjk4uay" path="res://Assets/InsideWalls/Foreground.PNG" id="2_s7knm"]
+[ext_resource type="Texture2D" uid="uid://drdgrs4wwuru5" path="res://Assets/InsideWalls/IMG-1011.PNG" id="3_a25gp"]
+[ext_resource type="Texture2D" uid="uid://bla4hbxk5s2uv" path="res://Assets/InsideWalls/IMG-1010.PNG" id="4_c2jq3"]
+[ext_resource type="Texture2D" uid="uid://dv4ntw402t6s1" path="res://Assets/InsideWalls/IMG-1013.PNG" id="5_tk33p"]
+[ext_resource type="Texture2D" uid="uid://dhuj3hroojvkc" path="res://Assets/InsideWalls/IMG-1014.PNG" id="6_4bpdr"]
+[ext_resource type="Texture2D" uid="uid://sigi8p52477e" path="res://Assets/InsideWalls/IMG-1015.PNG" id="7_c6dk4"]
+[ext_resource type="Texture2D" uid="uid://bhm2pmcmim3x8" path="res://Assets/InsideWalls/IMG-1017.PNG" id="8_bl62w"]
+[ext_resource type="PackedScene" uid="uid://dtli3ghkqdhc6" path="res://Player.tscn" id="9_2tgwn"]
+[ext_resource type="Texture2D" uid="uid://y0vou20euq5k" path="res://Assets/Player/Lil_mouse_ref.png" id="10_5vtuo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srfrl"]
+size = Vector2(1274, 20)
+
+[node name="InsideWallsScene" type="Node2D"]
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="IMG_1016" type="Sprite2D" parent="Level"]
+texture = ExtResource("1_iutpg")
+
+[node name="Foreground" type="Sprite2D" parent="Level"]
+texture = ExtResource("2_s7knm")
+
+[node name="IMG_1011" type="Sprite2D" parent="Level"]
+texture = ExtResource("3_a25gp")
+
+[node name="IMG_1010" type="Sprite2D" parent="Level"]
+texture = ExtResource("4_c2jq3")
+
+[node name="IMG_1013" type="Sprite2D" parent="Level"]
+texture = ExtResource("5_tk33p")
+
+[node name="IMG_1014" type="Sprite2D" parent="Level"]
+texture = ExtResource("6_4bpdr")
+
+[node name="IMG_1015" type="Sprite2D" parent="Level"]
+texture = ExtResource("7_c6dk4")
+
+[node name="IMG_1017" type="Sprite2D" parent="Level"]
+texture = ExtResource("8_bl62w")
+
+[node name="Player" parent="." instance=ExtResource("9_2tgwn")]
+position = Vector2(572, 2)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="StaticBodies" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StaticBodies"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodies/StaticBody2D"]
+position = Vector2(-647, 0)
+shape = SubResource("RectangleShape2D_srfrl")
+
+[node name="LilMouseRef" type="Sprite2D" parent="."]
+position = Vector2(756, 120)
+texture = ExtResource("10_5vtuo")

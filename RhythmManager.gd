@@ -18,7 +18,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	curr_beat = (get_playback_position() - offset_seconds) / beat_time
+	update_curr_beat()
 	if (is_within_x_timing_window(delta, delta) and signal_timer <= 0.0):
 		emit_signal("onBeat")
 		signal_timer = 5 * delta
@@ -26,6 +26,9 @@ func _process(delta: float) -> void:
 
 func compute_beat_time():
 	return (60.0 / BPM)
+
+func update_curr_beat():
+	curr_beat = (get_playback_position() - offset_seconds) / beat_time
 
 func is_within_x_timing_window(delta: float, tw: float):
 	var seconds_to_beat = abs(fmod(get_playback_position() - offset_seconds, beat_time))
