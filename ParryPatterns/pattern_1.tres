@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dm5tv4cuy85x0"]
+
+[ext_resource type="Script" path="res://ParryPattern.gd" id="1_2josa"]
+
+[resource]
+script = ExtResource("1_2josa")
+pattern_length = 4.0
+beatstamps = PackedFloat64Array(0, 1, 3, 3.5)

@@ -1,0 +1,28 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgscp43l6ojwi"]
+
+[ext_resource type="Script" path="res://Bat.gd" id="1_cbxih"]
+[ext_resource type="Texture2D" uid="uid://dppw2da87va6l" path="res://icon.svg" id="1_jr3h8"]
+[ext_resource type="Resource" uid="uid://dm5tv4cuy85x0" path="res://ParryPatterns/pattern_1.tres" id="2_fwb6f"]
+[ext_resource type="Resource" uid="uid://bou10evmoqnrv" path="res://ParryPatterns/pattern_2.tres" id="3_h8uyv"]
+[ext_resource type="Resource" uid="uid://b5raogs47q0mf" path="res://ParryPatterns/pattern_3.tres" id="4_0gf3r"]
+[ext_resource type="PackedScene" uid="uid://b31826kjq6nc7" path="res://BatCircle.tscn" id="5_e5e8t"]
+[ext_resource type="AudioStream" uid="uid://dsqocp5ybm8b1" path="res://Audio/pop.mp3" id="7_j7v08"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehdji"]
+
+[node name="Bat" type="Area2D"]
+script = ExtResource("1_cbxih")
+patterns = Array[Resource]([ExtResource("2_fwb6f"), ExtResource("3_h8uyv"), ExtResource("4_0gf3r")])
+reaction_time = 0.5
+bat_circle_packed_scene = ExtResource("5_e5e8t")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_jr3h8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_ehdji")
+
+[node name="PopSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_j7v08")

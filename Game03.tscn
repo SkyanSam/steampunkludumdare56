@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://rfmk8onpgj7a"]
+
+[ext_resource type="Texture2D" uid="uid://dppw2da87va6l" path="res://icon.svg" id="1_ogfx2"]
+[ext_resource type="PackedScene" uid="uid://dtli3ghkqdhc6" path="res://Player.tscn" id="2_tqj2e"]
+[ext_resource type="AudioStream" uid="uid://d3eyvdarw3a4w" path="res://Mustard - Ballin’.mp3" id="3_wbc1e"]
+[ext_resource type="Script" path="res://RhythmManager.gd" id="4_ve8qk"]
+[ext_resource type="PackedScene" uid="uid://cgscp43l6ojwi" path="res://Bat.tscn" id="6_5s8o4"]
+[ext_resource type="PackedScene" uid="uid://coxvvfimv3big" path="res://RotatoPlatform.tscn" id="8_gprvc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1hce"]
+size = Vector2(893.5, 128)
+
+[node name="Game02" type="Node2D"]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-444, -2)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(600, 487)
+scale = Vector2(6.96875, 1)
+texture = ExtResource("1_ogfx2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(600.25, 489)
+shape = SubResource("RectangleShape2D_q1hce")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(523, -241)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(600, 487)
+scale = Vector2(6.96875, 1)
+texture = ExtResource("1_ogfx2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(600.25, 489)
+shape = SubResource("RectangleShape2D_q1hce")
+
+[node name="Player" parent="." instance=ExtResource("2_tqj2e")]
+position = Vector2(-206, 372)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(572, 330)
+
+[node name="RhythmManager" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wbc1e")
+volume_db = -80.0
+script = ExtResource("4_ve8qk")
+
+[node name="RotatoPlatform" parent="." instance=ExtResource("8_gprvc")]
+position = Vector2(1906, 291)
+
+[node name="Bat" parent="." instance=ExtResource("6_5s8o4")]
+position = Vector2(543, 33)

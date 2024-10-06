@@ -127,8 +127,8 @@ func take_damage(damage_amount: int):
 	if ballin_lol:
 		mouse_health -= damage_amount
 		mouse_health = clamp(mouse_health, 0, max_health)  # Prevent negative health
-        
+		
 		emit_signal("health_changed", mouse_health)  # Emit signal with mouse_health
-        
+		
 		if mouse_health <= 0:
 			_eat_shit()
