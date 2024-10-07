@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://kkfqfo8x03uv"]
+
+[ext_resource type="Script" path="res://Scenes/gregattacks.gd" id="1_gup7b"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2djjf"]
+radius = 89.5117
+height = 501.842
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njsdk"]
+size = Vector2(134, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75d70"]
+size = Vector2(51, 29)
+
+[node name="GREG" type="CharacterBody2D"]
+position = Vector2(-241.11, -156.755)
+script = ExtResource("1_gup7b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.0605469, 0.255127)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_2djjf")
+
+[node name="CollarGun" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollarGun"]
+position = Vector2(65.1104, 9.25488)
+shape = SubResource("RectangleShape2D_njsdk")
+
+[node name="TongueGun" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TongueGun"]
+position = Vector2(144.61, -51.7451)
+shape = SubResource("RectangleShape2D_75d70")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.383
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.125
