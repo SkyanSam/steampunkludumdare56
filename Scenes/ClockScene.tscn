@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bekx8enho4ltu"]
+[gd_scene load_steps=21 format=3 uid="uid://bekx8enho4ltu"]
 
 [ext_resource type="Texture2D" uid="uid://c01sqmwr32px1" path="res://Assets/Clock/Clock bg.png" id="1_6er1j"]
 [ext_resource type="PackedScene" uid="uid://dtli3ghkqdhc6" path="res://Player.tscn" id="2_nyuxy"]
@@ -7,15 +7,30 @@
 [ext_resource type="AudioStream" uid="uid://duhw02eq3vlli" path="res://Audio/My hamster explodeded.mp3" id="4_w85sv"]
 [ext_resource type="Script" path="res://RhythmManager.gd" id="5_8awh6"]
 [ext_resource type="PackedScene" uid="uid://jpwct6an8b2q" path="res://Scenes/Clock/RotatoPlatform.tscn" id="6_pv4pb"]
+[ext_resource type="Script" path="res://RotatoPlatform.gd" id="7_3ss6n"]
 [ext_resource type="Texture2D" uid="uid://2s4oq66ekupm" path="res://Assets/Clock/Clock_bg_instructions.png" id="7_e043r"]
 [ext_resource type="Texture2D" uid="uid://tfo7cbhn5ra3" path="res://Assets/Clock/Clock_bg_bottom_platform.png" id="8_1buyq"]
 [ext_resource type="Texture2D" uid="uid://iuuv8xxfc5ko" path="res://Assets/Clock/Clock_bg_END_w_glow.png" id="9_uat2c"]
 [ext_resource type="Texture2D" uid="uid://b2tds65ha7148" path="res://Assets/Clock/Clock_bg_platform_2.png" id="10_3mg2q"]
 [ext_resource type="Texture2D" uid="uid://3umov5igkhnn" path="res://Assets/Clock/Clock_bg_platform_3.png" id="11_r5cnn"]
 [ext_resource type="Texture2D" uid="uid://dx26abi3oa4xg" path="res://Assets/Clock/Clock_bg_platform_4.png" id="12_yq6ft"]
+[ext_resource type="PackedScene" uid="uid://cgscp43l6ojwi" path="res://Bat.tscn" id="15_g3obd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fnmh0"]
+size = Vector2(1500, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikddo"]
+size = Vector2(78, 330)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aajht"]
 size = Vector2(6781, 537)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eon6o"]
+radius = 209.587
+height = 3653.39
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dxga"]
+size = Vector2(2366, 120.282)
 
 [node name="ClockScene" type="Node2D"]
 
@@ -41,38 +56,34 @@ texture = ExtResource("10_3mg2q")
 [node name="Clock_Bg_platform_3" type="Sprite2D" parent="Clock_Bg"]
 texture = ExtResource("11_r5cnn")
 
-[node name="Clock_Bg_platform_4" type="Sprite2D" parent="Clock_Bg"]
-texture = ExtResource("12_yq6ft")
-
 [node name="instructions" type="Sprite2D" parent="Clock_Bg"]
+visible = false
 texture = ExtResource("7_e043r")
 
-[node name="Player" parent="." instance=ExtResource("2_nyuxy")]
-position = Vector2(173, -164)
-scale = Vector2(2, 2)
-speed = 1066
-accel = 2904
-decel = 5928
-jump_speed = -2560
-ground_pound_speed = 8250
-gravity = 5940
-falling_gravity = 7128
+[node name="platform_4_center" type="Node2D" parent="Clock_Bg"]
+position = Vector2(1170.5, -887)
+script = ExtResource("7_3ss6n")
+rotate_amount = -21
+every_x_beats = 4
+back_and_forth = true
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-scale = Vector2(0.5, 0.5)
-zoom = Vector2(0.75, 0.75)
-limit_left = -10000
-limit_top = -10000
-limit_right = 10000
-limit_bottom = 10000
-position_smoothing_enabled = true
-script = ExtResource("3_fcc60")
-player = NodePath("..")
+[node name="Clock_Bg_platform_4" type="Sprite2D" parent="Clock_Bg/platform_4_center"]
+position = Vector2(-1170.5, 887)
+texture = ExtResource("12_yq6ft")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Clock_Bg/platform_4_center"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Clock_Bg/platform_4_center/StaticBody2D"]
+position = Vector2(-646, -12)
+shape = SubResource("RectangleShape2D_fnmh0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Clock_Bg/platform_4_center/StaticBody2D"]
+position = Vector2(-1367, -136)
+shape = SubResource("RectangleShape2D_ikddo")
 
 [node name="RotatoGear" parent="." instance=ExtResource("3_u7bje")]
 position = Vector2(2917, -3693)
 scale = Vector2(4, 4)
-rotate_amount = -45
 
 [node name="RotatoGear4" parent="." instance=ExtResource("3_u7bje")]
 position = Vector2(1425, -4424)
@@ -94,6 +105,11 @@ position = Vector2(1531, -7056)
 scale = Vector2(2, 2)
 every_x_beats = 4
 
+[node name="RotatoPlatform3" parent="." instance=ExtResource("6_pv4pb")]
+position = Vector2(2878, -2274)
+scale = Vector2(2, 2)
+every_x_beats = 4
+
 [node name="RotatoPlatform2" parent="." instance=ExtResource("6_pv4pb")]
 position = Vector2(317, -7137)
 rotation = 1.5708
@@ -108,10 +124,47 @@ script = ExtResource("5_8awh6")
 BPM = 196
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(94, -1648)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-148.5, 258.5)
 shape = SubResource("RectangleShape2D_aajht")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(533, -509)
+rotation = 1.13446
+shape = SubResource("CapsuleShape2D_eon6o")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1640, -4375)
+rotation = 0.610865
+shape = SubResource("RectangleShape2D_2dxga")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-2093, -4794, -865, -5134, -505, -4986, -245, -4998, -185, -5066, -233, -5086, -349, -5062, -853, -5326, -2125, -5022, -2317, -5074, -2577, -5010, -2505, -4758, -2417, -4630, -2269, -4638)
+
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(14, -81)
+
+[node name="Player" parent="." instance=ExtResource("2_nyuxy")]
+position = Vector2(-1720, -2062)
+scale = Vector2(2, 2)
+speed = 1066
+accel = 2904
+decel = 5928
+jump_speed = -2560
+ground_pound_speed = 8250
+gravity = 5940
+falling_gravity = 7128
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.5, 0.5)
+limit_left = -3700
+limit_top = -8000
+limit_right = 3700
+limit_bottom = -300
+position_smoothing_enabled = true
+script = ExtResource("3_fcc60")
+
+[node name="Bat" parent="." instance=ExtResource("15_g3obd")]
+position = Vector2(-1869, -2681)

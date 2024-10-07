@@ -1,9 +1,10 @@
-extends StaticBody2D
+extends Node2D
 
 @export var rotate_time = 0.1
 @export var rotate_amount = 45
 @export var every_x_beats = 2
 @onready var rhythm_manager = get_node("/root/" + get_tree().current_scene.name + "/RhythmManager")
+@export var back_and_forth = false
 var beats_left = 0
 
 func _ready() -> void:
@@ -18,4 +19,6 @@ func _on_beat():
 		var tween = create_tween()
 		tween.tween_property(self, "rotation_degrees", rotation_degrees + rotate_amount, rotate_time).set_ease(Tween.EASE_OUT_IN)
 		beats_left = every_x_beats
+		if back_and_forth:
+			rotate_amount *= -1
 	beats_left -= 1
