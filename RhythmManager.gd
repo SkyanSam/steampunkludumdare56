@@ -10,6 +10,7 @@ var curr_beat = 0.0
 
 signal onBeat
 
+@onready var player = get_parent().get_node("Player")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	beat_time = compute_beat_time()
@@ -18,6 +19,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	global_position = player.global_position
 	update_curr_beat()
 	if (is_within_x_timing_window(delta, delta) and signal_timer <= 0.0):
 		emit_signal("onBeat")

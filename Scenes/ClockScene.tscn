@@ -1,26 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bekx8enho4ltu"]
+[gd_scene load_steps=7 format=3 uid="uid://bekx8enho4ltu"]
 
-[ext_resource type="Texture2D" uid="uid://b2f5ntj7h51rp" path="res://Assets/Clock/gear.png" id="1_toejp"]
 [ext_resource type="PackedScene" uid="uid://dtli3ghkqdhc6" path="res://Player.tscn" id="2_nyuxy"]
 [ext_resource type="Script" path="res://Scenes/InsideWallsCam.gd" id="3_fcc60"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j0c6n"]
-size = Vector2(205, 210.718)
+[ext_resource type="PackedScene" uid="uid://dkjct2rvejcwa" path="res://Scenes/Clock/RotatoGear.tscn" id="3_u7bje"]
+[ext_resource type="AudioStream" uid="uid://duhw02eq3vlli" path="res://Audio/My hamster explodeded.mp3" id="4_w85sv"]
+[ext_resource type="Script" path="res://RhythmManager.gd" id="5_8awh6"]
+[ext_resource type="PackedScene" uid="uid://jpwct6an8b2q" path="res://Scenes/Clock/RotatoPlatform.tscn" id="6_pv4pb"]
 
 [node name="ClockScene" type="Node2D"]
 
-[node name="Gear2" type="Sprite2D" parent="."]
-position = Vector2(2166, -1028)
-scale = Vector2(4, 4)
-texture = ExtResource("1_toejp")
-
-[node name="Gear" type="Sprite2D" parent="."]
-position = Vector2(458, -160)
-scale = Vector2(4, 4)
-texture = ExtResource("1_toejp")
-
 [node name="Player" parent="." instance=ExtResource("2_nyuxy")]
-position = Vector2(1144, -417)
+position = Vector2(221, -837)
 scale = Vector2(2, 2)
 speed = 1066
 accel = 2904
@@ -41,14 +31,33 @@ position_smoothing_enabled = true
 script = ExtResource("3_fcc60")
 player = NodePath("..")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="RotatoGear" parent="." instance=ExtResource("3_u7bje")]
+position = Vector2(466, -158)
+scale = Vector2(4, 4)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1143.5, -156)
-shape = SubResource("RectangleShape2D_j0c6n")
+[node name="RotatoGear2" parent="." instance=ExtResource("3_u7bje")]
+position = Vector2(2155, -1020)
+scale = Vector2(4, 4)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1670.5, -557.5)
-rotation = -0.785398
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_j0c6n")
+[node name="RotatoGear3" parent="." instance=ExtResource("3_u7bje")]
+position = Vector2(471, -1967)
+scale = Vector2(4, 4)
+rotate_amount = -45
+
+[node name="RotatoPlatform" parent="." instance=ExtResource("6_pv4pb")]
+position = Vector2(-1097, -2262)
+scale = Vector2(2, 2)
+every_x_beats = 4
+
+[node name="RotatoPlatform2" parent="." instance=ExtResource("6_pv4pb")]
+position = Vector2(-2298, -2471)
+rotation = 1.5708
+scale = Vector2(2, 2)
+every_x_beats = 4
+
+[node name="RhythmManager" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_w85sv")
+volume_db = 12.0
+max_distance = 1e+08
+script = ExtResource("5_8awh6")
+BPM = 196

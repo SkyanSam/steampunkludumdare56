@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://jpwct6an8b2q"]
+
+[ext_resource type="Script" path="res://RotatoPlatform.gd" id="1_jspai"]
+[ext_resource type="Texture2D" uid="uid://pbryix6e5a7u" path="res://Assets/Clock/doublehandle.png" id="1_yfuej"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_41rjl"]
+radius = 49.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ghjn"]
+size = Vector2(400, 46)
+
+[node name="RotatoPlatform" type="StaticBody2D"]
+script = ExtResource("1_jspai")
+rotate_time = 0.2
+rotate_amount = 90
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yfuej")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_41rjl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_4ghjn")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(201, -21, 201, 26, 250, 0)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(2, 5)
+rotation = 3.14159
+polygon = PackedVector2Array(201, -21, 201, 26, 250, 0)

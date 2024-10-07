@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkjct2rvejcwa"]
+
+[ext_resource type="Script" path="res://RotatoPlatform.gd" id="1_ji21m"]
+[ext_resource type="Texture2D" uid="uid://b2f5ntj7h51rp" path="res://Assets/Clock/gear.png" id="2_jnr8k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ctqsj"]
+radius = 151.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_houc8"]
+size = Vector2(94, 51)
+
+[node name="RotatoGear" type="StaticBody2D"]
+script = ExtResource("1_ji21m")
+rotate_time = 0.25
+every_x_beats = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_jnr8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ctqsj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(151, 0.5)
+shape = SubResource("RectangleShape2D_houc8")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-151, 1)
+shape = SubResource("RectangleShape2D_houc8")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(0, -151)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_houc8")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 153)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_houc8")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2(109, 107)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_houc8")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2(-101, -112)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_houc8")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
+position = Vector2(102, -112)
+rotation = -0.785398
+shape = SubResource("RectangleShape2D_houc8")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="."]
+position = Vector2(-110, 103)
+rotation = -0.785398
+shape = SubResource("RectangleShape2D_houc8")
