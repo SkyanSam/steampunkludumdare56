@@ -28,6 +28,13 @@ texture = ExtResource("3_w3ykh")
 [node name="Player" parent="." instance=ExtResource("4_rl6dw")]
 position = Vector2(832, 661)
 scale = Vector2(2, 2)
+speed = 1332
+accel = 2904
+decel = 5928
+jump_speed = -3174
+ground_pound_speed = 10000
+gravity = 7200
+falling_gravity = 10000
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.55, 0.55)

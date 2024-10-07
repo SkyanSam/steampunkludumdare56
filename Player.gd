@@ -26,6 +26,7 @@ var can_parry = true
 var mouse_health = 100
 var max_health = 100
 var ballin_lol: bool = true #Flag to see if player is DEAD
+var jumps_left: int = 0
 
 signal health_changed(mouse_health)  # Signal updated to use mouse_health
 
@@ -69,6 +70,7 @@ func _physics_process(delta):
 	
 	if (is_on_floor()):
 		vel.y = 0
+		jumps_left = 2
 	
 	if (vel.y > 0):
 		vel.y += gravity * delta
@@ -85,8 +87,9 @@ func _physics_process(delta):
 		else:
 			vel.y = ground_pound_speed
 	if Input.is_action_just_pressed("ui_up"):
-		if is_on_floor():
+		if is_on_floor() || jumps_left > 0:
 			vel.y = jump_speed
+			jumps_left -= 1
 			is_jump_last_frame = true
 	if Input.is_action_just_released("ui_up") and is_jump_last_frame:
 		is_jump_last_frame = false

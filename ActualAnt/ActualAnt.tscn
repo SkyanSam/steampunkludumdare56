@@ -1,28 +1,42 @@
 [gd_scene load_steps=5 format=3 uid="uid://c2erxw5h3ilne"]
 
-[ext_resource type="Texture2D" uid="uid://dppw2da87va6l" path="res://icon.svg" id="1_8wjo7"]
 [ext_resource type="Script" path="res://ActualAnt/ActualAnt.gd" id="1_wrmo7"]
+[ext_resource type="SpriteFrames" uid="uid://b6vvo23lml4e2" path="res://Animations/ant_frames.tres" id="3_orpr7"]
 
 [sub_resource type="Curve2D" id="Curve2D_m7d4m"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1000, 0)
 }
-point_count = 3
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x8ptm"]
+size = Vector2(234, 147)
 
 [node name="ActualAntPath2D" type="Path2D"]
 curve = SubResource("Curve2D_m7d4m")
 
 [node name="ActualAntPathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(1000, 0)
+progress = 2000.0
 rotates = false
+loop = false
 
 [node name="ActualAnt" type="Area2D" parent="ActualAntPathFollow2D"]
 script = ExtResource("1_wrmo7")
-
-[node name="Sprite2D" type="Sprite2D" parent="ActualAntPathFollow2D/ActualAnt"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_8wjo7")
+speed = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActualAntPathFollow2D/ActualAnt"]
+position = Vector2(-6, 3.5)
 shape = SubResource("RectangleShape2D_x8ptm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ActualAntPathFollow2D/ActualAnt"]
+sprite_frames = ExtResource("3_orpr7")
+animation = &"idle"
+
+[node name="Timer" type="Timer" parent="ActualAntPathFollow2D/ActualAnt"]
+
+[node name="AttackTimer" type="Timer" parent="ActualAntPathFollow2D/ActualAnt"]
+
+[connection signal="body_entered" from="ActualAntPathFollow2D/ActualAnt" to="ActualAntPathFollow2D/ActualAnt" method="_on_body_entered"]
+[connection signal="timeout" from="ActualAntPathFollow2D/ActualAnt/Timer" to="ActualAntPathFollow2D/ActualAnt" method="_on_timer_timeout"]
+[connection signal="timeout" from="ActualAntPathFollow2D/ActualAnt/AttackTimer" to="ActualAntPathFollow2D/ActualAnt" method="_on_attack_timer_timeout"]
