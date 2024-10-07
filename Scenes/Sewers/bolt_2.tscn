@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddgunry3elwu4"]
+
+[ext_resource type="Texture2D" uid="uid://u648fa64y82a" path="res://Assets/Sewers/bolt2.png" id="1_bb5ic"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yohv1"]
+size = Vector2(841, 143)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnxm8"]
+size = Vector2(137.5, 354.5)
+
+[node name="Bolt2" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bb5ic")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(65.5, 9.5)
+shape = SubResource("RectangleShape2D_yohv1")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-420.75, 2.75)
+shape = SubResource("RectangleShape2D_xnxm8")

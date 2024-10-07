@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://dtli3ghkqdhc6"]
+[gd_scene load_steps=14 format=3 uid="uid://dtli3ghkqdhc6"]
 
 [ext_resource type="Script" path="res://Player.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://jivk770rv0x2" path="res://player_ratio.png" id="2_451ms"]
 [ext_resource type="AudioStream" uid="uid://cv1d6f7rrvf0p" path="res://Audio/pl_ch3000_mvmt_fs_01_1.wav" id="3_pcb54"]
 [ext_resource type="AudioStream" uid="uid://dr2yur31epj51" path="res://Audio/hurtmouse.wav" id="4_ych3g"]
-[ext_resource type="Texture2D" uid="uid://b6ed1pdpo5il8" path="res://Assets/Player/Mouse_spreadsheet_2.png" id="5_bvi0t"]
+[ext_resource type="Texture2D" uid="uid://bhvuyt6a20h8v" path="res://Assets/Player/mouse_spread_3.png" id="5_m0rgc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pa18h"]
 radius = 25.5
@@ -23,6 +23,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [15]
+}
+
+[sub_resource type="Animation" id="Animation_kcwy6"]
+resource_name = "attack"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23, 24, 25, 26]
 }
 
 [sub_resource type="Animation" id="Animation_5aj1v"]
@@ -57,6 +73,23 @@ tracks/0/keys = {
 "values": [9, 10, 11, 12, 13, 14, 15, 16, 17]
 }
 
+[sub_resource type="Animation" id="Animation_uxiiq"]
+resource_name = "parry"
+length = 2.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [22]
+}
+
 [sub_resource type="Animation" id="Animation_4byfd"]
 resource_name = "run"
 length = 9.0
@@ -74,29 +107,13 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
-[sub_resource type="Animation" id="Animation_kcwy6"]
-resource_name = "attack"
-length = 9.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Character:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [18, 19, 20, 21, 22, 23, 24, 25, 26]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2p5cm"]
 _data = {
 "RESET": SubResource("Animation_3ojr7"),
 "attack": SubResource("Animation_kcwy6"),
 "idle": SubResource("Animation_5aj1v"),
 "jump": SubResource("Animation_7c1io"),
+"parry": SubResource("Animation_uxiiq"),
 "run": SubResource("Animation_4byfd")
 }
 
@@ -137,10 +154,11 @@ speed_scale = 9.0
 [node name="Character" type="Sprite2D" parent="."]
 position = Vector2(0, 20)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_bvi0t")
+texture = ExtResource("5_m0rgc")
 hframes = 9
-vframes = 4
+vframes = 3
 frame = 15
 
+[connection signal="playerAttack" from="." to="." method="_on_player_attack"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="ParryTimer" to="." method="_on_parry_timer_timeout"]

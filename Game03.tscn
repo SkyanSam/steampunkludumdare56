@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1hce"]
 size = Vector2(893.5, 128)
 
-[node name="Game02" type="Node2D"]
+[node name="Game03" type="Node2D"]
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(-444, -2)
@@ -38,6 +38,7 @@ shape = SubResource("RectangleShape2D_q1hce")
 
 [node name="Player" parent="." instance=ExtResource("2_tqj2e")]
 position = Vector2(-206, 372)
+parry_window = 0.1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(572, 330)

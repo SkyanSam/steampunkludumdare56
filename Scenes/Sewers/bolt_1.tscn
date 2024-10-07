@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnxksyqhevjbb"]
+
+[ext_resource type="Texture2D" uid="uid://c7cip7m6l77wi" path="res://Assets/Sewers/bolt1.png" id="1_usdfo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k0db"]
+size = Vector2(474, 477)
+
+[node name="Bolt1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_usdfo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 0.5)
+shape = SubResource("RectangleShape2D_7k0db")

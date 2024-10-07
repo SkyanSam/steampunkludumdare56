@@ -46,11 +46,11 @@ func _process(delta: float) -> void:
 	if mode == Mode.BatAttack and curr_att_index < len(curr_pattern.beatstamps):
 		var target_time = (curr_pattern.beatstamps[curr_att_index] + beattime_pattern_instanced) * rhythm_manager.beat_time
 		var curr_time = rhythm_manager.get_playback_position()
-		var miss_time = target_time + rhythm_manager.timing_window
-		if (curr_time >= miss_time):
-			print("player owie " + str(curr_att_index) + ", " + str(curr_time) + ", " + str(miss_time))
+		#var miss_time = target_time + rhythm_manager.timing_window
+		if (curr_time >= target_time):
+			#print("player owie " + str(curr_att_index) + ", " + str(curr_time) + ", " + str(miss_time))
 			curr_att_index += 1
-			player.take_damage(1)
+			player._on_enemy_attack()
 	
 	# Scream or Attack depending on the circumstance, this is timed to the beat.
 	if curr_index < len(curr_pattern.beatstamps):
@@ -77,11 +77,12 @@ func _process(delta: float) -> void:
 			Mode.BatAttack:
 				if (curr_att_index >= len(curr_pattern.beatstamps)):
 					instance_new_pattern_with_time(t)
-	if (Input.is_action_just_pressed("attack")):
+	
+	"""if (Input.is_action_just_pressed("attack")):
 		if (is_on_beat()):
 			health -= 1
 		else:
-			player.take_damage()
+			player.take_damage()"""
 			
 
 func instance_new_pattern():
@@ -127,10 +128,11 @@ func _on_Player_attack(_type, _player):
 	print("player att")
 	if (_type == Player.AttackType.PARRY and mode == Mode.BatAttack):
 		if (curr_att_index < len(curr_pattern.beatstamps)):
+			bat_hurt()
 			var target_time = (curr_pattern.beatstamps[curr_att_index] + beattime_pattern_instanced) * rhythm_manager.beat_time
 			var curr_time = rhythm_manager.get_playback_position()
-			if abs(target_time - curr_time) < rhythm_manager.timing_window:
-				player.get_node("ParrySound").play()
+			if abs(target_time - curr_time) < player.parry_window:
+				#player.get_node("ParrySound").play()
 				bat_hurt()
 				curr_att_index += 1
 func bat_hurt():

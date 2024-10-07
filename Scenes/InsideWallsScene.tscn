@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dhn2jatu23bus"]
+[gd_scene load_steps=32 format=3 uid="uid://dhn2jatu23bus"]
 
 [ext_resource type="Texture2D" uid="uid://cyi4e5gbk6l3t" path="res://Assets/InsideWalls/IMG-1016.PNG" id="1_iutpg"]
 [ext_resource type="Texture2D" uid="uid://bfow0rdjk4uay" path="res://Assets/InsideWalls/Foreground.PNG" id="2_s7knm"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" path="res://EnemyAnt.gd" id="12_yj0vn"]
 [ext_resource type="Texture2D" uid="uid://jivk770rv0x2" path="res://player_ratio.png" id="13_oaeya"]
 [ext_resource type="Script" path="res://Spear.gd" id="14_nfbyf"]
+[ext_resource type="AudioStream" uid="uid://d3eyvdarw3a4w" path="res://Mustard - Ballin’.mp3" id="15_7drk8"]
+[ext_resource type="Script" path="res://RhythmManager.gd" id="16_owq61"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srfrl"]
 size = Vector2(1575.75, 196)
@@ -238,5 +240,10 @@ position = Vector2(-0.5, -32)
 shape = SubResource("RectangleShape2D_bt6cv")
 
 [node name="SpearAttackTimer" type="Timer" parent="EnemyAnt"]
+
+[node name="RhythmManager" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_7drk8")
+volume_db = -80.0
+script = ExtResource("16_owq61")
 
 [connection signal="timeout" from="EnemyAnt/SpearAttackTimer" to="EnemyAnt" method="_on_spear_attack_timer_timeout"]

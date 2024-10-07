@@ -1,3 +1,57 @@
-[gd_scene format=3 uid="uid://bcxxdroqhoeu3"]
+[gd_scene load_steps=8 format=3 uid="uid://bcxxdroqhoeu3"]
+
+[ext_resource type="Texture2D" uid="uid://dvq3l072k2gsp" path="res://Assets/Sewers/inside_tube_1.png" id="1_stl48"]
+[ext_resource type="Texture2D" uid="uid://bxhprq6p0fyqr" path="res://Assets/Sewers/outside_tube_1.png" id="2_xkc7t"]
+[ext_resource type="PackedScene" uid="uid://dtli3ghkqdhc6" path="res://Player.tscn" id="3_a4s5a"]
+[ext_resource type="Script" path="res://Scenes/InsideWallsCam.gd" id="4_lkq6j"]
+[ext_resource type="PackedScene" uid="uid://bnxksyqhevjbb" path="res://Scenes/Sewers/bolt_1.tscn" id="5_k1lqv"]
+[ext_resource type="PackedScene" uid="uid://ddgunry3elwu4" path="res://Scenes/Sewers/bolt_2.tscn" id="6_pape6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgqe7"]
+size = Vector2(1895, 112)
 
 [node name="SewersScene" type="Node2D"]
+
+[node name="InsideTube" type="Sprite2D" parent="."]
+scale = Vector2(7.5, 7.5)
+texture = ExtResource("1_stl48")
+
+[node name="OutsideTube" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2147, -853)
+scale = Vector2(7.5, 7.5)
+texture = ExtResource("2_xkc7t")
+
+[node name="Player" parent="." instance=ExtResource("3_a4s5a")]
+position = Vector2(-5164, -1862)
+scale = Vector2(2, 2)
+speed = 1066
+accel = 2904
+decel = 5928
+jump_speed = -2560
+ground_pound_speed = 8250
+gravity = 5940
+falling_gravity = 7128
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+scale = Vector2(0.5, 0.5)
+zoom = Vector2(0.75, 0.75)
+limit_left = -100000
+limit_top = -100000
+limit_right = 1000000
+limit_bottom = 100000000
+position_smoothing_enabled = true
+script = ExtResource("4_lkq6j")
+player = NodePath("..")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-2155, -278)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-3012, -830)
+shape = SubResource("RectangleShape2D_jgqe7")
+
+[node name="Bolt1" parent="." instance=ExtResource("5_k1lqv")]
+
+[node name="Bolt2" parent="." instance=ExtResource("6_pape6")]
+position = Vector2(-232, 240)
