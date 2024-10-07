@@ -7,7 +7,7 @@ var beat_time = 0.0
 var can_signal = true
 var signal_timer = 0.0
 var curr_beat = 0.0
-
+var last_beat : int = 0
 signal onBeat
 
 @onready var player = get_parent().get_node("Player")
@@ -21,10 +21,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	global_position = player.global_position
 	update_curr_beat()
+	if (floor(curr_beat) != last_beat):
+		emit_signal("onBeat")
+		last_beat = floor(curr_beat)
+	"""
 	if (is_within_x_timing_window(delta, delta) and signal_timer <= 0.0):
 		emit_signal("onBeat")
 		signal_timer = 5 * delta
-	signal_timer -= delta
+	signal_timer -= delta"""
 
 func compute_beat_time():
 	return (60.0 / BPM)

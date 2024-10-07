@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://kkfqfo8x03uv"]
+[gd_scene load_steps=9 format=3 uid="uid://kkfqfo8x03uv"]
 
-[ext_resource type="Script" path="res://Scenes/gregattacks.gd" id="1_gup7b"]
+[ext_resource type="Script" path="res://gregattacks.gd" id="1_gup7b"]
+[ext_resource type="Texture2D" uid="uid://868jc0nyglry" path="res://Assets/Lizard_gun.png" id="2_eshkv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2djjf"]
 radius = 89.5117
@@ -11,6 +12,45 @@ size = Vector2(134, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75d70"]
 size = Vector2(51, 29)
+
+[sub_resource type="Animation" id="Animation_041pn"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 2
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_c0et6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f3lko"]
+_data = {
+"RESET": SubResource("Animation_c0et6"),
+"idle": SubResource("Animation_041pn")
+}
 
 [node name="GREG" type="CharacterBody2D"]
 position = Vector2(-241.11, -156.755)
@@ -38,3 +78,15 @@ wait_time = 0.383
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.125
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_eshkv")
+hframes = 4
+vframes = 2
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f3lko")
+}
+speed_scale = 4.0
