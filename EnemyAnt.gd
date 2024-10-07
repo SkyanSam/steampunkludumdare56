@@ -42,6 +42,14 @@ func _process(delta):
 
 	var distance_to_player = global_position.distance_to(player.global_position)
 
+	# Check if the player is to the right or left and rotate accordingly
+	if player.global_position.x > global_position.x:
+		# Player is to the right
+		rotation = 12  # Face right ((0 degrees)
+	else:
+		# Player is to the left
+		rotation = 145  # Face left (180 degrees)
+
 	# If the spear has been thrown, the ant can only sprint and use jaw attacks
 	if has_thrown_spear:
 		if is_sprinting:

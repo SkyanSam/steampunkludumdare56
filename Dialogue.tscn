@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://hvc3l5mm5irc"]
+
+[ext_resource type="Script" path="res://DIALOGUE.gd" id="1_xuuys"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_loqrx"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+editor_description = "THIS NEEDS TO WORK AAAAAAAAAAA"
+
+[node name="DialogueBox" type="Panel" parent="."]
+top_level = true
+offset_left = -398.724
+offset_top = 2393.22
+offset_right = 241.276
+offset_bottom = 2649.22
+script = ExtResource("1_xuuys")
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 224.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -40.0
+theme_override_font_sizes/normal_font_size = 20
+text = "We're adding all dialogue in nodes like this. This shit is just like the battle pass."
+
+[node name="NPCIcon" type="TextureRect" parent="DialogueBox"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 40.0
+offset_right = 208.0
+offset_bottom = 216.0
+texture = SubResource("PlaceholderTexture2D_loqrx")
+
+[node name="Okay" type="Button" parent="DialogueBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 368.0
+offset_top = 176.0
+offset_right = -176.0
+offset_bottom = -40.0
+text = "Okay."
+
+[connection signal="pressed" from="DialogueBox/Okay" to="DialogueBox" method="_on_okay_pressed"]
