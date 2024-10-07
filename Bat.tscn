@@ -1,14 +1,53 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgscp43l6ojwi"]
+[gd_scene load_steps=12 format=3 uid="uid://cgscp43l6ojwi"]
 
 [ext_resource type="Script" path="res://Bat.gd" id="1_cbxih"]
-[ext_resource type="Texture2D" uid="uid://dppw2da87va6l" path="res://icon.svg" id="1_jr3h8"]
 [ext_resource type="Resource" uid="uid://dm5tv4cuy85x0" path="res://ParryPatterns/pattern_1.tres" id="2_fwb6f"]
 [ext_resource type="Resource" uid="uid://bou10evmoqnrv" path="res://ParryPatterns/pattern_2.tres" id="3_h8uyv"]
 [ext_resource type="Resource" uid="uid://b5raogs47q0mf" path="res://ParryPatterns/pattern_3.tres" id="4_0gf3r"]
 [ext_resource type="PackedScene" uid="uid://b31826kjq6nc7" path="res://BatCircle.tscn" id="5_e5e8t"]
+[ext_resource type="Texture2D" uid="uid://beetxgcd5rno8" path="res://Assets/Bat/IMG_1030.png" id="6_qpfts"]
 [ext_resource type="AudioStream" uid="uid://dsqocp5ybm8b1" path="res://Audio/pop.mp3" id="7_j7v08"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehdji"]
+
+[sub_resource type="Animation" id="Animation_do358"]
+resource_name = "flap"
+length = 9.0
+loop_mode = 2
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_1bvtc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lgvn0"]
+_data = {
+"RESET": SubResource("Animation_1bvtc"),
+"flap": SubResource("Animation_do358")
+}
 
 [node name="Bat" type="Area2D"]
 script = ExtResource("1_cbxih")
@@ -17,12 +56,20 @@ reaction_time = 0.5
 bat_circle_packed_scene = ExtResource("5_e5e8t")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-1, 71)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_jr3h8")
+texture = ExtResource("6_qpfts")
+hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(3, 3)
+scale = Vector2(6, 6)
 shape = SubResource("RectangleShape2D_ehdji")
 
 [node name="PopSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_j7v08")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lgvn0")
+}
+speed_scale = 10.0

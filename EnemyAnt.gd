@@ -27,6 +27,7 @@ func _ready():
 	player.connect("playerAttack", Callable(self, "_on_Player_attack"))
 	# Connect spear collision signals (using Callable syntax in Godot 4)
 	var spear = $Spear
+	$AnimationPlayer.play("idle")
 	
 	
 	spear.connect("body_entered", Callable(self, "_on_spear_hit"))
@@ -37,6 +38,8 @@ func _ready():
 
 # Called every frame, use to process player detection and movement
 func _process(delta):
+	if $AnimationPlayer.current_animation == "attack" and $AnimationPlayer.animation_finised:
+		$AnimationPlayer.play("idle")
 	if is_dead:
 		return
 
@@ -104,6 +107,8 @@ func throw_spear():
 	spear_instance.apply_impulse((player.global_position - global_position).normalized() * 800)
 	attack_count = 0  # Reset the attack count after throwing the spear
 	
+	$AnimationPlayer.play("attack")
+	
 	# Mark that the spear has been thrown
 	has_thrown_spear = true
 	can_attack = false  # Disable normal attacks after the spear is thrown
@@ -125,6 +130,7 @@ func perform_jaw_attack():
 	if is_jaw_attacking:
 		return  # Prevent attacking if the attack is already in progress
 	
+	$AnimationPlayer.play("attack")
 	var distance_to_player = global_position.distance_to(player.global_position)
 	
 	# Check if the player is in range for the jaw attack

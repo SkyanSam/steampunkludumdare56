@@ -1,0 +1,119 @@
+[gd_scene load_steps=11 format=3 uid="uid://cowqo41tnlnd7"]
+
+[ext_resource type="Script" path="res://EnemyAnt.gd" id="1_ogfbh"]
+[ext_resource type="Texture2D" uid="uid://jivk770rv0x2" path="res://player_ratio.png" id="2_oofv5"]
+[ext_resource type="Script" path="res://Spear.gd" id="3_4l82l"]
+[ext_resource type="Texture2D" uid="uid://c17xyg4wffxgd" path="res://Assets/Bugs_spreadsheet.png" id="4_hwwkx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkvil"]
+size = Vector2(49, 102)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bt6cv"]
+size = Vector2(49, 26)
+
+[sub_resource type="Animation" id="Animation_w8djj"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_qcbmp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+
+[sub_resource type="Animation" id="Animation_we2ir"]
+resource_name = "attack"
+length = 8.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vg1if"]
+_data = {
+"RESET": SubResource("Animation_qcbmp"),
+"attack": SubResource("Animation_we2ir"),
+"idle": SubResource("Animation_w8djj")
+}
+
+[node name="EnemyAnt" type="CharacterBody2D"]
+scale = Vector2(2.3, 2.3)
+script = ExtResource("1_ogfbh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.183333, 1, 0, 1)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_oofv5")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(16.5217, -23.4783)
+rotation = 2.35619
+shape = SubResource("RectangleShape2D_tkvil")
+
+[node name="Spear" type="Area2D" parent="."]
+position = Vector2(3.53549, 44.5477)
+rotation = 1.5708
+script = ExtResource("3_4l82l")
+
+[node name="Sprite2D" type="Sprite2D" parent="Spear"]
+visible = false
+position = Vector2(0, -31)
+rotation = 1.5708
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_oofv5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spear"]
+position = Vector2(-11.0695, -4.29055)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_bt6cv")
+
+[node name="SpearAttackTimer" type="Timer" parent="."]
+
+[node name="Character" type="Sprite2D" parent="."]
+scale = Vector2(0.435, 0.435)
+texture = ExtResource("4_hwwkx")
+hframes = 8
+vframes = 3
+frame = 14
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vg1if")
+}
+speed_scale = 4.0
+
+[connection signal="timeout" from="SpearAttackTimer" to="." method="_on_spear_attack_timer_timeout"]

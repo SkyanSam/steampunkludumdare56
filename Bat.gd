@@ -31,6 +31,8 @@ var mode : Mode = Mode.BatScream
 func _ready() -> void:
 	rhythm_manager.connect("onBeat", Callable(self, "_on_beat"))
 	player.connect("playerAttack", Callable(self, "_on_Player_attack"))
+	$AnimationPlayer.play("flap")
+	
 func _on_beat():
 	if (curr_pattern == null):
 		instance_new_pattern()

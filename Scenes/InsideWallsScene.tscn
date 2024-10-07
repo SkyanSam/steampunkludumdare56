@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dhn2jatu23bus"]
+[gd_scene load_steps=28 format=3 uid="uid://dhn2jatu23bus"]
 
 [ext_resource type="Texture2D" uid="uid://cyi4e5gbk6l3t" path="res://Assets/InsideWalls/IMG-1016.PNG" id="1_iutpg"]
 [ext_resource type="Texture2D" uid="uid://bfow0rdjk4uay" path="res://Assets/InsideWalls/Foreground.PNG" id="2_s7knm"]
@@ -11,9 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dtli3ghkqdhc6" path="res://Player.tscn" id="9_2tgwn"]
 [ext_resource type="Script" path="res://Scenes/InsideWallsCam.gd" id="9_a036c"]
 [ext_resource type="Texture2D" uid="uid://cttwwpkc43oka" path="res://Assets/InsideWalls/InsideWallsNail.PNG" id="11_f4lm0"]
-[ext_resource type="Script" path="res://EnemyAnt.gd" id="12_yj0vn"]
-[ext_resource type="Texture2D" uid="uid://jivk770rv0x2" path="res://player_ratio.png" id="13_oaeya"]
-[ext_resource type="Script" path="res://Spear.gd" id="14_nfbyf"]
+[ext_resource type="PackedScene" uid="uid://cowqo41tnlnd7" path="res://EnemyAnt.tscn" id="12_06a38"]
 [ext_resource type="AudioStream" uid="uid://d3eyvdarw3a4w" path="res://Mustard - Ballin’.mp3" id="15_7drk8"]
 [ext_resource type="Script" path="res://RhythmManager.gd" id="16_owq61"]
 
@@ -54,12 +52,6 @@ size = Vector2(1552.5, 6291.5)
 size = Vector2(2692, 922.375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kmy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkvil"]
-size = Vector2(49, 102)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bt6cv"]
-size = Vector2(49, 26)
 
 [node name="InsideWallsScene" type="Node2D"]
 
@@ -208,42 +200,10 @@ texture = ExtResource("11_f4lm0")
 scale = Vector2(7, 7)
 shape = SubResource("RectangleShape2D_r7kmy")
 
-[node name="EnemyAnt" type="CharacterBody2D" parent="."]
-position = Vector2(183, 2795)
-rotation = 0.785398
-scale = Vector2(2.3, 2.3)
-script = ExtResource("12_yj0vn")
-
-[node name="Sprite2D" type="Sprite2D" parent="EnemyAnt"]
-modulate = Color(0.183333, 1, 0, 1)
-rotation = 1.5708
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("13_oaeya")
-
-[node name="Hitbox" type="CollisionShape2D" parent="EnemyAnt"]
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_tkvil")
-
-[node name="Spear" type="Area2D" parent="EnemyAnt"]
-position = Vector2(3.53549, 44.5477)
-rotation = 1.5708
-script = ExtResource("14_nfbyf")
-
-[node name="Sprite2D" type="Sprite2D" parent="EnemyAnt/Spear"]
-position = Vector2(0, -31)
-rotation = 1.5708
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("13_oaeya")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAnt/Spear"]
-position = Vector2(-0.5, -32)
-shape = SubResource("RectangleShape2D_bt6cv")
-
-[node name="SpearAttackTimer" type="Timer" parent="EnemyAnt"]
+[node name="EnemyAnt" parent="." instance=ExtResource("12_06a38")]
+position = Vector2(756, 2706)
 
 [node name="RhythmManager" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_7drk8")
 volume_db = -80.0
 script = ExtResource("16_owq61")
-
-[connection signal="timeout" from="EnemyAnt/SpearAttackTimer" to="EnemyAnt" method="_on_spear_attack_timer_timeout"]
