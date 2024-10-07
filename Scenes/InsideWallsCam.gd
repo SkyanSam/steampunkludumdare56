@@ -6,5 +6,6 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
-	global_position.y = get_node(player).global_position.y
+	pass
+	#global_position.y = get_node(player).global_position.y
 	# note, add some drag...

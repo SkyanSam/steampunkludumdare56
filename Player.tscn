@@ -1,13 +1,86 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtli3ghkqdhc6"]
+[gd_scene load_steps=12 format=3 uid="uid://dtli3ghkqdhc6"]
 
 [ext_resource type="Script" path="res://Player.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://jivk770rv0x2" path="res://player_ratio.png" id="2_451ms"]
 [ext_resource type="AudioStream" uid="uid://cv1d6f7rrvf0p" path="res://Audio/pl_ch3000_mvmt_fs_01_1.wav" id="3_pcb54"]
 [ext_resource type="AudioStream" uid="uid://dr2yur31epj51" path="res://Audio/hurtmouse.wav" id="4_ych3g"]
-[ext_resource type="Texture2D" uid="uid://y0vou20euq5k" path="res://Assets/Player/Lil_mouse_ref.png" id="5_3wkys"]
+[ext_resource type="Texture2D" uid="uid://b6ed1pdpo5il8" path="res://Assets/Player/Mouse_spreadsheet_2.png" id="5_bvi0t"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxys3"]
-size = Vector2(51, 99)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pa18h"]
+radius = 25.5
+height = 101.0
+
+[sub_resource type="Animation" id="Animation_3ojr7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+
+[sub_resource type="Animation" id="Animation_4byfd"]
+resource_name = "run"
+length = 9.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_7c1io"]
+resource_name = "jump"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_5aj1v"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2p5cm"]
+_data = {
+"RESET": SubResource("Animation_3ojr7"),
+"idle": SubResource("Animation_5aj1v"),
+"jump": SubResource("Animation_7c1io"),
+"run": SubResource("Animation_4byfd")
+}
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("2")
@@ -19,12 +92,13 @@ gravity = 3600
 falling_gravity = 5000
 
 [node name="Sprite2D_ref" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_451ms")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -0.5)
-shape = SubResource("RectangleShape2D_pxys3")
+shape = SubResource("CapsuleShape2D_pa18h")
 
 [node name="AttackTimer" type="Timer" parent="."]
 
@@ -36,10 +110,19 @@ stream = ExtResource("3_pcb54")
 [node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_ych3g")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -10)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2p5cm")
+}
+speed_scale = 9.0
+
+[node name="Character" type="Sprite2D" parent="."]
+position = Vector2(0, 20)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_3wkys")
+texture = ExtResource("5_bvi0t")
+hframes = 9
+vframes = 4
+frame = 15
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="ParryTimer" to="." method="_on_parry_timer_timeout"]

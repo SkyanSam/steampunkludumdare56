@@ -91,6 +91,7 @@ func _physics_process(delta):
 			vel.y = jump_speed
 			jumps_left -= 1
 			is_jump_last_frame = true
+			$AnimationPlayer.play("jump")
 	if Input.is_action_just_released("ui_up") and is_jump_last_frame:
 		is_jump_last_frame = false
 		if vel.y < 0.0:
@@ -109,6 +110,18 @@ func _physics_process(delta):
 	velocity = vel
 	set_up_direction(Vector2.UP)
 	move_and_slide()
+	
+	# x animation stuff
+	if (is_on_floor()):
+		if (vel.x != 0 and $AnimationPlayer.current_animation != "run"):
+			$AnimationPlayer.play("run")
+		if (vel.x == 0 and $AnimationPlayer.current_animation != "idle"):
+			$AnimationPlayer.play("idle")
+	if vel.x > 0:
+		$Character.flip_h = false
+	elif vel.x < 0:
+		$Character.flip_h = true
+			
 
 func _on_attack_timer_timeout() -> void:
 	can_attack = true
