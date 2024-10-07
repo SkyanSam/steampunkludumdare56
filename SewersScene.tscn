@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bcxxdroqhoeu3"]
+[gd_scene load_steps=16 format=3 uid="uid://bcxxdroqhoeu3"]
 
 [ext_resource type="Texture2D" uid="uid://dvq3l072k2gsp" path="res://Assets/Sewers/inside_tube_1.png" id="1_stl48"]
 [ext_resource type="Texture2D" uid="uid://bxhprq6p0fyqr" path="res://Assets/Sewers/outside_tube_1.png" id="2_xkc7t"]
@@ -10,9 +10,19 @@
 [ext_resource type="Script" path="res://RhythmManager.gd" id="8_lpsuj"]
 [ext_resource type="PackedScene" uid="uid://kkfqfo8x03uv" path="res://greg.tscn" id="9_28bxj"]
 [ext_resource type="PackedScene" uid="uid://c2erxw5h3ilne" path="res://ActualAnt/ActualAnt.tscn" id="10_t45fh"]
+[ext_resource type="Script" path="res://SCENE.gd" id="11_fegfd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jgqe7"]
-size = Vector2(1895, 112)
+size = Vector2(2562.7, 91.7572)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c5ym3"]
+size = Vector2(3629.09, 279)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bjjwq"]
+size = Vector2(1251, 198.684)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5xqd"]
+radius = 572.828
 
 [node name="SewersScene" type="Node2D"]
 
@@ -27,7 +37,7 @@ scale = Vector2(7.5, 7.5)
 texture = ExtResource("2_xkc7t")
 
 [node name="Player" parent="." instance=ExtResource("3_a4s5a")]
-position = Vector2(-5164, -1862)
+position = Vector2(5306.19, -3752.39)
 scale = Vector2(2, 2)
 speed = 1200
 accel = 1000
@@ -54,7 +64,7 @@ script = ExtResource("8_lpsuj")
 position = Vector2(-2155, -278)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-3012, -830)
+position = Vector2(-2209.5, 2126.66)
 shape = SubResource("RectangleShape2D_jgqe7")
 
 [node name="Bolt1" parent="." instance=ExtResource("5_k1lqv")]
@@ -119,7 +129,7 @@ position = Vector2(-4283.11, 1670.24)
 script = null
 
 [node name="GREG2" parent="." instance=ExtResource("9_28bxj")]
-position = Vector2(-1541.11, -1252.76)
+position = Vector2(-2346.77, -1410.52)
 script = null
 
 [node name="GREG3" parent="." instance=ExtResource("9_28bxj")]
@@ -137,3 +147,80 @@ position = Vector2(5272, 2351)
 
 [node name="ActualAntPath2D4" parent="." instance=ExtResource("10_t45fh")]
 position = Vector2(4224, 2371)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-2155, -278)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(1522.75, 2000)
+shape = SubResource("RectangleShape2D_jgqe7")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(-2155, -278)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-3764, 517)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_jgqe7")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(-5844.51, 1666.91)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(0, -28.5088)
+rotation = 0.785398
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_jgqe7")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(-4378, 168)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+position = Vector2(52.5, -1241.46)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_c5ym3")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="."]
+position = Vector2(15504.4, 1588.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
+position = Vector2(-17317.1, -2729.63)
+shape = SubResource("RectangleShape2D_jgqe7")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="."]
+position = Vector2(-570.792, -2419.59)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
+position = Vector2(-201.87, 20.0925)
+shape = SubResource("RectangleShape2D_jgqe7")
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="."]
+position = Vector2(-3476.93, -2755.95)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D8"]
+position = Vector2(100.93, 154.601)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_jgqe7")
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="."]
+position = Vector2(-3772.93, -1518.15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D9"]
+position = Vector2(257.925, 35.2729)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_jgqe7")
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="."]
+position = Vector2(1420.45, -2338.87)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D10"]
+position = Vector2(-315.951, 35.5247)
+shape = SubResource("RectangleShape2D_bjjwq")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-5107.41, -1246.32)
+script = ExtResource("11_fegfd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-12.1924, 14.3877)
+shape = SubResource("CircleShape2D_o5xqd")
