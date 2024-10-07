@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bekx8enho4ltu"]
+[gd_scene load_steps=15 format=3 uid="uid://bekx8enho4ltu"]
 
 [ext_resource type="Texture2D" uid="uid://c01sqmwr32px1" path="res://Assets/Clock/Clock bg.png" id="1_6er1j"]
 [ext_resource type="PackedScene" uid="uid://dtli3ghkqdhc6" path="res://Player.tscn" id="2_nyuxy"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://duhw02eq3vlli" path="res://Audio/My hamster explodeded.mp3" id="4_w85sv"]
 [ext_resource type="Script" path="res://RhythmManager.gd" id="5_8awh6"]
 [ext_resource type="PackedScene" uid="uid://jpwct6an8b2q" path="res://Scenes/Clock/RotatoPlatform.tscn" id="6_pv4pb"]
+[ext_resource type="Texture2D" uid="uid://2s4oq66ekupm" path="res://Assets/Clock/Clock_bg_instructions.png" id="7_e043r"]
 [ext_resource type="Texture2D" uid="uid://tfo7cbhn5ra3" path="res://Assets/Clock/Clock_bg_bottom_platform.png" id="8_1buyq"]
 [ext_resource type="Texture2D" uid="uid://iuuv8xxfc5ko" path="res://Assets/Clock/Clock_bg_END_w_glow.png" id="9_uat2c"]
 [ext_resource type="Texture2D" uid="uid://b2tds65ha7148" path="res://Assets/Clock/Clock_bg_platform_2.png" id="10_3mg2q"]
@@ -20,18 +21,21 @@ size = Vector2(6781, 537)
 
 [node name="Clock_Bg" type="Node2D" parent="."]
 position = Vector2(0, -4082)
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Clock_Bg"]
 texture = ExtResource("1_6er1j")
 
 [node name="Clock_Bg_END_w_glow" type="Sprite2D" parent="Clock_Bg"]
+position = Vector2(800.5, -40)
 texture = ExtResource("9_uat2c")
 
 [node name="Clock_bg_bottom_platform" type="Sprite2D" parent="Clock_Bg"]
 texture = ExtResource("8_1buyq")
 
 [node name="Clock_Bg_platform_2" type="Sprite2D" parent="Clock_Bg"]
+position = Vector2(171, 102)
+rotation = 0.0872665
 texture = ExtResource("10_3mg2q")
 
 [node name="Clock_Bg_platform_3" type="Sprite2D" parent="Clock_Bg"]
@@ -39,6 +43,9 @@ texture = ExtResource("11_r5cnn")
 
 [node name="Clock_Bg_platform_4" type="Sprite2D" parent="Clock_Bg"]
 texture = ExtResource("12_yq6ft")
+
+[node name="instructions" type="Sprite2D" parent="Clock_Bg"]
+texture = ExtResource("7_e043r")
 
 [node name="Player" parent="." instance=ExtResource("2_nyuxy")]
 position = Vector2(173, -164)
@@ -63,25 +70,32 @@ script = ExtResource("3_fcc60")
 player = NodePath("..")
 
 [node name="RotatoGear" parent="." instance=ExtResource("3_u7bje")]
-position = Vector2(466, -1236)
+position = Vector2(2917, -3693)
 scale = Vector2(4, 4)
+rotate_amount = -45
+
+[node name="RotatoGear4" parent="." instance=ExtResource("3_u7bje")]
+position = Vector2(1425, -4424)
+scale = Vector2(4, 4)
+rotate_amount = -45
 
 [node name="RotatoGear2" parent="." instance=ExtResource("3_u7bje")]
-position = Vector2(2014, -1836)
+position = Vector2(60, -3406)
 scale = Vector2(4, 4)
+rotate_amount = -45
 
 [node name="RotatoGear3" parent="." instance=ExtResource("3_u7bje")]
-position = Vector2(471, -2985)
+position = Vector2(-1187, -4654)
 scale = Vector2(4, 4)
 rotate_amount = -45
 
 [node name="RotatoPlatform" parent="." instance=ExtResource("6_pv4pb")]
-position = Vector2(-1209, -778)
+position = Vector2(1531, -7056)
 scale = Vector2(2, 2)
 every_x_beats = 4
 
 [node name="RotatoPlatform2" parent="." instance=ExtResource("6_pv4pb")]
-position = Vector2(-954, -3906)
+position = Vector2(317, -7137)
 rotation = 1.5708
 scale = Vector2(2, 2)
 every_x_beats = 4
