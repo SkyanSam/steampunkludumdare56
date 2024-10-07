@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://dy5a2pqkb6nkg"]
+
+[ext_resource type="Script" path="res://gearrotato.gd" id="1_pps7p"]
+[ext_resource type="Texture2D" uid="uid://eywbhwagtoi0" path="res://Assets/titletext.png" id="1_vlgf7"]
+[ext_resource type="Texture2D" uid="uid://bx5ekfr6r046h" path="res://Assets/TITLEBGLOL.jpg" id="2_p0rlt"]
+[ext_resource type="Texture2D" uid="uid://bfhluqpptqanp" path="res://Assets/gear.png" id="2_x4rpm"]
+[ext_resource type="Script" path="res://gearreverse.gd" id="4_pmx3x"]
+
+[node name="Title" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+top_level = true
+visibility_layer = 1023
+z_index = 4
+position = Vector2(961.93, 349.558)
+scale = Vector2(0.640035, 0.995049)
+texture = ExtResource("1_vlgf7")
+
+[node name="Node2D2" type="Node2D" parent="."]
+top_level = true
+position = Vector2(1432, 237)
+scale = Vector2(0.474, 0.474)
+script = ExtResource("1_pps7p")
+
+[node name="Gear" type="Sprite2D" parent="Node2D2"]
+scale = Vector2(1, 1)
+texture = ExtResource("2_x4rpm")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Titlebglol" type="Sprite2D" parent="Node2D"]
+position = Vector2(961, 536)
+scale = Vector2(0.662751, 0.738889)
+texture = ExtResource("2_p0rlt")
+
+[node name="Node2D3" type="Node2D" parent="."]
+script = ExtResource("4_pmx3x")
+
+[node name="Gear" type="Sprite2D" parent="Node2D3"]
+position = Vector2(1535, 394)
+scale = Vector2(0.534, 0.534)
+texture = ExtResource("2_x4rpm")
+
+[node name="Node2D4" type="Node2D" parent="."]
+script = ExtResource("1_pps7p")
+
+[node name="Gear" type="Sprite2D" parent="Node2D4"]
+position = Vector2(1820, 1026)
+texture = ExtResource("2_x4rpm")
+
+[node name="Node2D5" type="Node2D" parent="."]
+script = ExtResource("4_pmx3x")
+
+[node name="Gear" type="Sprite2D" parent="Node2D5"]
+position = Vector2(1530, 1071)
+scale = Vector2(0.619295, 0.619295)
+texture = ExtResource("2_x4rpm")
+
+[node name="Node2D6" type="Node2D" parent="."]
+top_level = true
+position = Vector2(-210, 686)
+script = ExtResource("1_pps7p")
+
+[node name="Gear" type="Sprite2D" parent="Node2D6"]
+position = Vector2(1548, 422)
+scale = Vector2(0.452, 0.452)
+texture = ExtResource("2_x4rpm")
+
+[node name="Node2D7" type="Node2D" parent="."]
+position = Vector2(60, 952)
+script = ExtResource("4_pmx3x")
+
+[node name="Gear" type="Sprite2D" parent="Node2D7"]
+position = Vector2(26.0001, 48)
+scale = Vector2(0.619295, 0.619295)
+texture = ExtResource("2_x4rpm")
