@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cowqo41tnlnd7"]
+[gd_scene load_steps=12 format=3 uid="uid://cowqo41tnlnd7"]
 
 [ext_resource type="Script" path="res://EnemyAnt.gd" id="1_ogfbh"]
 [ext_resource type="Texture2D" uid="uid://jivk770rv0x2" path="res://player_ratio.png" id="2_oofv5"]
 [ext_resource type="Script" path="res://Spear.gd" id="3_4l82l"]
 [ext_resource type="Texture2D" uid="uid://c17xyg4wffxgd" path="res://Assets/Bugs_spreadsheet.png" id="4_hwwkx"]
+[ext_resource type="PackedScene" uid="uid://dpidxt2d182fk" path="res://HP/HP.tscn" id="5_mvjha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tkvil"]
 size = Vector2(49, 102)
@@ -115,5 +116,12 @@ libraries = {
 "": SubResource("AnimationLibrary_vg1if")
 }
 speed_scale = 4.0
+
+[node name="HP" parent="." instance=ExtResource("5_mvjha")]
+position = Vector2(0, -70)
+start_hp = 120
+max_dmg = 2
+sprite_path = NodePath("../Character")
+handle_death = false
 
 [connection signal="timeout" from="SpearAttackTimer" to="." method="_on_spear_attack_timer_timeout"]

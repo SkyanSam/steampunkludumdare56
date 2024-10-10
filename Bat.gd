@@ -10,6 +10,8 @@ extends Area2D
 # Rhythm Manager & Player singletons, self explanatory
 @onready var rhythm_manager = get_tree().get_root().get_node(NodePath(get_tree().current_scene.name)).get_node("RhythmManager")
 @onready var player = get_tree().get_root().get_node(NodePath(get_tree().current_scene.name)).get_node("Player")
+
+@export var max_radius = 1000
 # The current pattern
 var curr_pattern : Resource = null
 var last_circle : Node2D = null
@@ -28,13 +30,15 @@ enum Mode {
 }
 var mode : Mode = Mode.BatScream
 
+func is_player_close() -> bool: return (global_position - player.global_position).length() < max_radius
+
 func _ready() -> void:
 	rhythm_manager.connect("onBeat", Callable(self, "_on_beat"))
 	player.connect("playerAttack", Callable(self, "_on_Player_attack"))
 	$AnimationPlayer.play("flap")
 	
 func _on_beat():
-	if (curr_pattern == null):
+	if (curr_pattern == null and is_player_close()):
 		instance_new_pattern()
 
 func _process(delta: float) -> void:
@@ -88,12 +92,14 @@ func _process(delta: float) -> void:
 			
 
 func instance_new_pattern():
-	curr_pattern = patterns[randi_range(0, len(patterns) - 1)]
-	reset_pattern(Mode.BatScream)
+	if is_player_close():
+		curr_pattern = patterns[randi_range(0, len(patterns) - 1)]
+		reset_pattern(Mode.BatScream)
 
 func instance_new_pattern_with_time(t):
-	curr_pattern = patterns[randi_range(0, len(patterns) - 1)]
-	reset_pattern_with_time(Mode.BatScream, t)
+	if is_player_close():
+		curr_pattern = patterns[randi_range(0, len(patterns) - 1)]
+		reset_pattern_with_time(Mode.BatScream, t)
 
 func debug_pop():
 	$PopSound.pitch_scale = 2
@@ -138,5 +144,5 @@ func _on_Player_attack(_type, _player):
 				bat_hurt()
 				curr_att_index += 1
 func bat_hurt():
-	print("bat hurt owie :(")
+	$HP.take_damage()
 	

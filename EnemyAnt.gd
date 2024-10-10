@@ -83,10 +83,10 @@ func _on_Player_attack(type, player):
 # Take damage and apply knockback
 func take_damage(damage):
 	var final_damage = damage - player.defense
-	health -= final_damage
+	$HP.take_x_damage(final_damage) #health -= final_damage
 	knockback()  # Apply knockback based on hit direction
 	
-	if health <= 0:
+	if $HP.hp <= 0:
 		start_death_sequence()
 
 # Knockback logic

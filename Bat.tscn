@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgscp43l6ojwi"]
+[gd_scene load_steps=13 format=3 uid="uid://cgscp43l6ojwi"]
 
 [ext_resource type="Script" path="res://Bat.gd" id="1_cbxih"]
 [ext_resource type="Resource" uid="uid://dm5tv4cuy85x0" path="res://ParryPatterns/pattern_1.tres" id="2_fwb6f"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b31826kjq6nc7" path="res://BatCircle.tscn" id="5_e5e8t"]
 [ext_resource type="Texture2D" uid="uid://beetxgcd5rno8" path="res://Assets/Bat/IMG_1030.png" id="6_qpfts"]
 [ext_resource type="AudioStream" uid="uid://dsqocp5ybm8b1" path="res://Audio/pop.mp3" id="7_j7v08"]
+[ext_resource type="PackedScene" uid="uid://dpidxt2d182fk" path="res://HP/HP.tscn" id="8_8mi7v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehdji"]
 
@@ -73,3 +74,10 @@ libraries = {
 "": SubResource("AnimationLibrary_lgvn0")
 }
 speed_scale = 10.0
+
+[node name="HP" parent="." instance=ExtResource("8_8mi7v")]
+position = Vector2(0, -90)
+start_hp = 40
+max_dmg = 2
+dmg_cooldown = 0.4
+sprite_path = NodePath("../Sprite")

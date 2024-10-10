@@ -12,6 +12,7 @@ var tongue_speed = 200  # How fast the tongue moves
 var max_tongue_length = 300  # Max distance the tongue can extend
 var tongue_extended = false  # Whether the tongue is currently extended
 
+# gabe implement hp.gd please and thanks. Its in HP/hp.gd
 @onready var tongue = $CollarGun/CollisionShape2D
 @onready var tongue_shape = tongue.shape
 

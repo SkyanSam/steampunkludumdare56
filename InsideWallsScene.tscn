@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dhn2jatu23bus"]
+[gd_scene load_steps=32 format=3 uid="uid://duuhxeowq0llb"]
 
 [ext_resource type="Texture2D" uid="uid://cyi4e5gbk6l3t" path="res://Assets/InsideWalls/IMG-1016.PNG" id="1_iutpg"]
 [ext_resource type="Texture2D" uid="uid://bfow0rdjk4uay" path="res://Assets/InsideWalls/Foreground.PNG" id="2_s7knm"]
@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://EnemyAnt.gd" id="12_yj0vn"]
 [ext_resource type="Texture2D" uid="uid://jivk770rv0x2" path="res://player_ratio.png" id="13_oaeya"]
 [ext_resource type="Script" path="res://Spear.gd" id="14_nfbyf"]
-[ext_resource type="PackedScene" uid="uid://hvc3l5mm5irc" path="res://Dialogue.tscn" id="15_twkne"]
+[ext_resource type="PackedScene" path="res://Dialogue.tscn" id="15_twkne"]
 [ext_resource type="PackedScene" uid="uid://c2erxw5h3ilne" path="res://ActualAnt/ActualAnt.tscn" id="16_q7va5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srfrl"]

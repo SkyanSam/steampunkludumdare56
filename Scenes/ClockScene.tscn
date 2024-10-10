@@ -156,6 +156,7 @@ jump_speed = -2560
 ground_pound_speed = 8250
 gravity = 5940
 falling_gravity = 7128
+parry_window = 0.075
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.5, 0.5)
@@ -168,3 +169,4 @@ script = ExtResource("3_fcc60")
 
 [node name="Bat" parent="." instance=ExtResource("15_g3obd")]
 position = Vector2(-1869, -2681)
+max_radius = 3000

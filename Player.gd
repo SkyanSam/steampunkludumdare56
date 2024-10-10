@@ -158,13 +158,12 @@ func _on_attack_timer_timeout() -> void:
 
 func _on_enemy_attack():
 	last_hurt_timestamp = Time.get_ticks_msec() / 1000.0
-	if Input.is_action_just_pressed("parry"):
+	if Input.is_action_just_pressed("parry"): # The attack just happened this frame
 		emit_signal("playerAttack", AttackType.PARRY, self)
-	else:
+	elif is_within_parry_window(): # The attack happened in a previous frame
+		emit_signal("playerAttack", AttackType.PARRY, self)
+	else: # The attack may happen in a future frame
 		attack_pending = true
-		if is_within_parry_window():
-			emit_signal("playerAttack", AttackType.PARRY, self)
-
 func _on_parry_timer_timeout() -> void:
 	can_parry = true
 
@@ -174,16 +173,19 @@ func _eat_shit():    #you eat shit
 
 func take_damage(damage_amount: int):
 	$HurtSound.play()
+	$HP.take_damage()
+	"""COMMENTED OUT BECAUSE THIS IS HANDLED by hp.gd
 	if ballin_lol:
 		mouse_health -= damage_amount
 		mouse_health = clamp(mouse_health, 0, max_health)  # Prevent negative health
-		
 		emit_signal("health_changed", mouse_health)  # Emit signal with mouse_health
 		
 		if mouse_health <= 0:
-			_eat_shit()
-
+			_eat_shit()"""
 
 func _on_player_attack(mode, body) -> void:
 	if (mode == AttackType.PARRY):
 		$ParrySound.play()
+
+func _on_hp_health_changed(new_hp: Variant) -> void:
+	emit_signal("health_changed", new_hp)

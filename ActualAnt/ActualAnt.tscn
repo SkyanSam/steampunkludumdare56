@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2erxw5h3ilne"]
+[gd_scene load_steps=6 format=3 uid="uid://c2erxw5h3ilne"]
 
 [ext_resource type="Script" path="res://ActualAnt/ActualAnt.gd" id="1_wrmo7"]
+[ext_resource type="PackedScene" uid="uid://dpidxt2d182fk" path="res://HP/HP.tscn" id="3_gbpio"]
 [ext_resource type="SpriteFrames" uid="uid://b6vvo23lml4e2" path="res://Animations/ant_frames.tres" id="3_orpr7"]
 
 [sub_resource type="Curve2D" id="Curve2D_m7d4m"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1000, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 169, 7, 0, 0, 0, 0, 862, 18)
 }
 point_count = 2
 
@@ -36,6 +37,14 @@ animation = &"idle"
 [node name="Timer" type="Timer" parent="ActualAntPathFollow2D/ActualAnt"]
 
 [node name="AttackTimer" type="Timer" parent="ActualAntPathFollow2D/ActualAnt"]
+
+[node name="HP" parent="ActualAntPathFollow2D/ActualAnt" instance=ExtResource("3_gbpio")]
+position = Vector2(0, -90)
+scale = Vector2(1.5, 1.5)
+start_hp = 6
+max_dmg = 2
+dmg_cooldown = 1.0
+sprite_path = NodePath("../AnimatedSprite2D")
 
 [connection signal="body_entered" from="ActualAntPathFollow2D/ActualAnt" to="ActualAntPathFollow2D/ActualAnt" method="_on_body_entered"]
 [connection signal="timeout" from="ActualAntPathFollow2D/ActualAnt/Timer" to="ActualAntPathFollow2D/ActualAnt" method="_on_timer_timeout"]

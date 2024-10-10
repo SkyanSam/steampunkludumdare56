@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dtli3ghkqdhc6"]
+[gd_scene load_steps=15 format=3 uid="uid://dtli3ghkqdhc6"]
 
 [ext_resource type="Script" path="res://Player.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://jivk770rv0x2" path="res://player_ratio.png" id="2_451ms"]
 [ext_resource type="AudioStream" uid="uid://cv1d6f7rrvf0p" path="res://Audio/pl_ch3000_mvmt_fs_01_1.wav" id="3_pcb54"]
 [ext_resource type="AudioStream" uid="uid://dr2yur31epj51" path="res://Audio/hurtmouse.wav" id="4_ych3g"]
 [ext_resource type="Texture2D" uid="uid://bhvuyt6a20h8v" path="res://Assets/Player/mouse_spread_3.png" id="5_m0rgc"]
+[ext_resource type="PackedScene" uid="uid://dpidxt2d182fk" path="res://HP/HP.tscn" id="6_equkr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pa18h"]
 radius = 25.5
@@ -159,6 +160,11 @@ hframes = 9
 vframes = 3
 frame = 15
 
+[node name="HP" parent="." instance=ExtResource("6_equkr")]
+position = Vector2(0, -100)
+sprite_path = NodePath("../Character")
+
 [connection signal="playerAttack" from="." to="." method="_on_player_attack"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="ParryTimer" to="." method="_on_parry_timer_timeout"]
+[connection signal="health_changed" from="HP" to="." method="_on_hp_health_changed"]

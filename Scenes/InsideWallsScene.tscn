@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dhn2jatu23bus"]
+[gd_scene load_steps=29 format=3 uid="uid://dhn2jatu23bus"]
 
 [ext_resource type="Texture2D" uid="uid://cyi4e5gbk6l3t" path="res://Assets/InsideWalls/IMG-1016.PNG" id="1_iutpg"]
 [ext_resource type="Texture2D" uid="uid://bfow0rdjk4uay" path="res://Assets/InsideWalls/Foreground.PNG" id="2_s7knm"]
@@ -12,7 +12,8 @@
 [ext_resource type="Script" path="res://Scenes/InsideWallsCam.gd" id="9_a036c"]
 [ext_resource type="Texture2D" uid="uid://cttwwpkc43oka" path="res://Assets/InsideWalls/InsideWallsNail.PNG" id="11_f4lm0"]
 [ext_resource type="PackedScene" uid="uid://cowqo41tnlnd7" path="res://EnemyAnt.tscn" id="12_06a38"]
-[ext_resource type="AudioStream" uid="uid://d3eyvdarw3a4w" path="res://Mustard - Ballin’.mp3" id="15_7drk8"]
+[ext_resource type="AudioStream" uid="uid://bnc0tv61d24uw" path="res://Audio/sewer hi tech.mp3" id="13_uicqa"]
+[ext_resource type="PackedScene" uid="uid://c2erxw5h3ilne" path="res://ActualAnt/ActualAnt.tscn" id="15_u7qmg"]
 [ext_resource type="Script" path="res://RhythmManager.gd" id="16_owq61"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srfrl"]
@@ -201,9 +202,11 @@ scale = Vector2(7, 7)
 shape = SubResource("RectangleShape2D_r7kmy")
 
 [node name="EnemyAnt" parent="." instance=ExtResource("12_06a38")]
-position = Vector2(756, 2706)
+position = Vector2(5513, 682)
 
 [node name="RhythmManager" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("15_7drk8")
-volume_db = -80.0
+stream = ExtResource("13_uicqa")
 script = ExtResource("16_owq61")
+
+[node name="ActualAntPath2D" parent="." instance=ExtResource("15_u7qmg")]
+position = Vector2(-1373, 1346)

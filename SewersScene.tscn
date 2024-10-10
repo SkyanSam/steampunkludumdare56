@@ -57,7 +57,7 @@ position_smoothing_enabled = true
 script = ExtResource("4_lkq6j")
 player = NodePath("..")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="RhythmManager" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("8_lpsuj")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -169,7 +169,6 @@ position = Vector2(-5844.51, 1666.91)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2(0, -28.5088)
 rotation = 0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_jgqe7")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
