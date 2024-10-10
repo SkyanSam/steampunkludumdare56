@@ -17,7 +17,7 @@ size = Vector2(234, 147)
 curve = SubResource("Curve2D_m7d4m")
 
 [node name="ActualAntPathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(1000, 0)
+position = Vector2(862, 18)
 progress = 2000.0
 rotates = false
 loop = false
@@ -28,6 +28,7 @@ speed = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActualAntPathFollow2D/ActualAnt"]
 position = Vector2(-6, 3.5)
+scale = Vector2(1.75, 1.75)
 shape = SubResource("RectangleShape2D_x8ptm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ActualAntPathFollow2D/ActualAnt"]
@@ -47,5 +48,6 @@ dmg_cooldown = 1.0
 sprite_path = NodePath("../AnimatedSprite2D")
 
 [connection signal="body_entered" from="ActualAntPathFollow2D/ActualAnt" to="ActualAntPathFollow2D/ActualAnt" method="_on_body_entered"]
+[connection signal="body_exited" from="ActualAntPathFollow2D/ActualAnt" to="ActualAntPathFollow2D/ActualAnt" method="_on_body_exited"]
 [connection signal="timeout" from="ActualAntPathFollow2D/ActualAnt/Timer" to="ActualAntPathFollow2D/ActualAnt" method="_on_timer_timeout"]
 [connection signal="timeout" from="ActualAntPathFollow2D/ActualAnt/AttackTimer" to="ActualAntPathFollow2D/ActualAnt" method="_on_attack_timer_timeout"]

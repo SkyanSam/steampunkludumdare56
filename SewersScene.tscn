@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bcxxdroqhoeu3"]
+[gd_scene load_steps=17 format=3 uid="uid://bcxxdroqhoeu3"]
 
 [ext_resource type="Texture2D" uid="uid://dvq3l072k2gsp" path="res://Assets/Sewers/inside_tube_1.png" id="1_stl48"]
 [ext_resource type="Texture2D" uid="uid://bxhprq6p0fyqr" path="res://Assets/Sewers/outside_tube_1.png" id="2_xkc7t"]
@@ -18,6 +18,9 @@ size = Vector2(2562.7, 91.7572)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5ym3"]
 size = Vector2(3629.09, 279)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_knjwp"]
+size = Vector2(3307.45, 598.879)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjjwq"]
 size = Vector2(1251, 198.684)
 
@@ -35,27 +38,6 @@ visible = false
 position = Vector2(2147, -853)
 scale = Vector2(7.5, 7.5)
 texture = ExtResource("2_xkc7t")
-
-[node name="Player" parent="." instance=ExtResource("3_a4s5a")]
-position = Vector2(5306.19, -3752.39)
-scale = Vector2(2, 2)
-speed = 1200
-accel = 1000
-decel = 2000
-jump_speed = -3000
-gravity = 4000
-falling_gravity = 6000
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-scale = Vector2(0.5, 0.5)
-zoom = Vector2(0.75, 0.75)
-limit_left = -100000
-limit_top = -100000
-limit_right = 1000000
-limit_bottom = 100000000
-position_smoothing_enabled = true
-script = ExtResource("4_lkq6j")
-player = NodePath("..")
 
 [node name="RhythmManager" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("8_lpsuj")
@@ -186,6 +168,13 @@ position = Vector2(15504.4, 1588.2)
 position = Vector2(-17317.1, -2729.63)
 shape = SubResource("RectangleShape2D_jgqe7")
 
+[node name="StaticBody2D11" type="StaticBody2D" parent="."]
+position = Vector2(21981, 5246)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D11"]
+position = Vector2(-16902, -2476.44)
+shape = SubResource("RectangleShape2D_knjwp")
+
 [node name="StaticBody2D7" type="StaticBody2D" parent="."]
 position = Vector2(-570.792, -2419.59)
 
@@ -215,6 +204,28 @@ position = Vector2(1420.45, -2338.87)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D10"]
 position = Vector2(-315.951, 35.5247)
 shape = SubResource("RectangleShape2D_bjjwq")
+
+[node name="Player" parent="." instance=ExtResource("3_a4s5a")]
+position = Vector2(-5171, -2713)
+scale = Vector2(2, 2)
+speed = 1066
+accel = 2904
+decel = 5928
+jump_speed = -2560
+ground_pound_speed = 8250
+gravity = 5940
+falling_gravity = 7128
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+scale = Vector2(0.5, 0.5)
+zoom = Vector2(0.75, 0.75)
+limit_left = -1316134912
+limit_top = -1215752192
+limit_right = 100000
+limit_bottom = 1316134912
+position_smoothing_enabled = true
+script = ExtResource("4_lkq6j")
+player = NodePath("..")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-5107.41, -1246.32)

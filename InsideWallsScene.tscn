@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://duuhxeowq0llb"]
+[gd_scene load_steps=30 format=3 uid="uid://duuhxeowq0llb"]
 
 [ext_resource type="Texture2D" uid="uid://cyi4e5gbk6l3t" path="res://Assets/InsideWalls/IMG-1016.PNG" id="1_iutpg"]
 [ext_resource type="Texture2D" uid="uid://bfow0rdjk4uay" path="res://Assets/InsideWalls/Foreground.PNG" id="2_s7knm"]
@@ -11,11 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://dtli3ghkqdhc6" path="res://Player.tscn" id="9_2tgwn"]
 [ext_resource type="Script" path="res://Scenes/InsideWallsCam.gd" id="9_a036c"]
 [ext_resource type="Texture2D" uid="uid://cttwwpkc43oka" path="res://Assets/InsideWalls/InsideWallsNail.PNG" id="11_f4lm0"]
-[ext_resource type="Script" path="res://EnemyAnt.gd" id="12_yj0vn"]
-[ext_resource type="Texture2D" uid="uid://jivk770rv0x2" path="res://player_ratio.png" id="13_oaeya"]
-[ext_resource type="Script" path="res://Spear.gd" id="14_nfbyf"]
+[ext_resource type="PackedScene" uid="uid://cowqo41tnlnd7" path="res://EnemyAnt.tscn" id="14_kjhfd"]
+[ext_resource type="AudioStream" uid="uid://bnc0tv61d24uw" path="res://Audio/sewer hi tech.mp3" id="15_ljtsi"]
 [ext_resource type="PackedScene" path="res://Dialogue.tscn" id="15_twkne"]
 [ext_resource type="PackedScene" uid="uid://c2erxw5h3ilne" path="res://ActualAnt/ActualAnt.tscn" id="16_q7va5"]
+[ext_resource type="Script" path="res://RhythmManager.gd" id="16_w7uw1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srfrl"]
 size = Vector2(1575.75, 196)
@@ -54,12 +54,6 @@ size = Vector2(1552.5, 6291.5)
 size = Vector2(2692, 922.375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kmy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkvil"]
-size = Vector2(49, 102)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bt6cv"]
-size = Vector2(49, 26)
 
 [node name="InsideWallsScene" type="Node2D"]
 
@@ -208,39 +202,6 @@ texture = ExtResource("11_f4lm0")
 scale = Vector2(7, 7)
 shape = SubResource("RectangleShape2D_r7kmy")
 
-[node name="EnemyAnt" type="CharacterBody2D" parent="."]
-position = Vector2(180.11, 1098.86)
-rotation = 0.785398
-scale = Vector2(2.3, 2.3)
-script = ExtResource("12_yj0vn")
-
-[node name="Sprite2D" type="Sprite2D" parent="EnemyAnt"]
-modulate = Color(0.183333, 1, 0, 1)
-rotation = 1.5708
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("13_oaeya")
-
-[node name="Hitbox" type="CollisionShape2D" parent="EnemyAnt"]
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_tkvil")
-
-[node name="Spear" type="Area2D" parent="EnemyAnt"]
-position = Vector2(3.53549, 44.5477)
-rotation = 1.5708
-script = ExtResource("14_nfbyf")
-
-[node name="Sprite2D" type="Sprite2D" parent="EnemyAnt/Spear"]
-position = Vector2(0, -31)
-rotation = 1.5708
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("13_oaeya")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAnt/Spear"]
-position = Vector2(-0.5, -32)
-shape = SubResource("RectangleShape2D_bt6cv")
-
-[node name="SpearAttackTimer" type="Timer" parent="EnemyAnt"]
-
 [node name="Dialogue" parent="." instance=ExtResource("15_twkne")]
 process_mode = 3
 physics_interpolation_mode = 1
@@ -260,4 +221,11 @@ position = Vector2(-1192, 1368)
 position = Vector2(484.435, -1640)
 scale = Vector2(1.00543, 1)
 
-[connection signal="timeout" from="EnemyAnt/SpearAttackTimer" to="EnemyAnt" method="_on_spear_attack_timer_timeout"]
+[node name="EnemyAnt2" parent="." instance=ExtResource("14_kjhfd")]
+position = Vector2(127, 1130)
+
+[node name="RhythmManager" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(1, 0)
+stream = ExtResource("15_ljtsi")
+max_distance = 1e+18
+script = ExtResource("16_w7uw1")
